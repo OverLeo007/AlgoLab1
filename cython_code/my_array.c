@@ -4,7 +4,6 @@
 {
     "distutils": {
         "depends": [],
-        "language": "c",
         "name": "cython_code.my_array",
         "sources": [
             "my_array.pyx"
@@ -25,7 +24,7 @@ END: Cython Metadata */
 #else
 #define CYTHON_ABI "0_29_32"
 #define CYTHON_HEX_VERSION 0x001D20F0
-#define CYTHON_FUTURE_DIVISION 1
+#define CYTHON_FUTURE_DIVISION 0
 #include <stddef.h>
 #ifndef offsetof
   #define offsetof(type, member) ( (size_t) & ((type*)0) -> member )
@@ -978,7 +977,7 @@ struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_object____array____size__t___to
 struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_int____array____size__t____object___to_py;
 struct __pyx_t_11cython_code_8my_array_arraydescr;
 
-/* "cython_code/my_array.pyx":61
+/* "cython_code/my_array.pyx":91
  * 
  * #   ,  -
  * cdef enum TypeCode:             # <<<<<<<<<<<<<<
@@ -990,9 +989,9 @@ enum __pyx_t_11cython_code_8my_array_TypeCode {
   __pyx_e_11cython_code_8my_array_LONG = 1
 };
 
-/* "cython_code/my_array.pyx":18
- * #    .      array:
- * # https://github.com/python/cpython/blob/243b6c3b8fd3144450c477d99f01e31e7c3ebc0f/Modules/arraymodule.c#L32
+/* "cython_code/my_array.pyx":26
+ * 
+ * # ,
  * cdef struct arraydescr:             # <<<<<<<<<<<<<<
  *     char * typecode
  *     int itemsize
@@ -1004,12 +1003,12 @@ struct __pyx_t_11cython_code_8my_array_arraydescr {
   int (*setitem)(struct __pyx_obj_11cython_code_8my_array_array *, size_t, PyObject *);
 };
 
-/* "cython_code/my_array.pyx":83
- * 
+/* "cython_code/my_array.pyx":120
+ *     return index
  * 
  * cdef class array:             # <<<<<<<<<<<<<<
- *     #   .
- *     #   length   ,    data
+ *     """
+ *       ,    list  python,
  */
 struct __pyx_obj_11cython_code_8my_array_array {
   PyObject_HEAD
@@ -1020,12 +1019,12 @@ struct __pyx_obj_11cython_code_8my_array_array {
 };
 
 
-/* "cython_code/my_array.pyx":217
+/* "cython_code/my_array.pyx":317
  *         return True
  * 
  *     def __str__(self) -> str:             # <<<<<<<<<<<<<<
+ *         """
  * 
- *         return f"[{', '.join(str(i) for i in self)}]"
  */
 struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct____str__ {
   PyObject_HEAD
@@ -1033,9 +1032,9 @@ struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct____str__ {
 };
 
 
-/* "cython_code/my_array.pyx":219
- *     def __str__(self) -> str:
- * 
+/* "cython_code/my_array.pyx":322
+ *         :return:    [x1, x2, x3],   -
+ *         """
  *         return f"[{', '.join(str(i) for i in self)}]"             # <<<<<<<<<<<<<<
  * 
  *     def __repr__(self) -> str:
@@ -1044,15 +1043,18 @@ struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct_1_genexpr {
   PyObject_HEAD
   struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct____str__ *__pyx_outer_scope;
   PyObject *__pyx_v_i;
+  PyObject *__pyx_t_0;
+  Py_ssize_t __pyx_t_1;
+  PyObject *(*__pyx_t_2)(PyObject *);
 };
 
 
-/* "cython_code/my_array.pyx":221
+/* "cython_code/my_array.pyx":324
  *         return f"[{', '.join(str(i) for i in self)}]"
  * 
  *     def __repr__(self) -> str:             # <<<<<<<<<<<<<<
+ *         """
  * 
- *         return f"[{', '.join(str(i) for i in self)}]"
  */
 struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct_2___repr__ {
   PyObject_HEAD
@@ -1060,9 +1062,9 @@ struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct_2___repr__ {
 };
 
 
-/* "cython_code/my_array.pyx":223
- *     def __repr__(self) -> str:
- * 
+/* "cython_code/my_array.pyx":329
+ *         :return:    [x1, x2, x3],   -
+ *         """
  *         return f"[{', '.join(str(i) for i in self)}]"             # <<<<<<<<<<<<<<
  * 
  *     def __sizeof__(self) -> size_t:
@@ -1071,6 +1073,9 @@ struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct_3_genexpr {
   PyObject_HEAD
   struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct_2___repr__ *__pyx_outer_scope;
   PyObject *__pyx_v_i;
+  PyObject *__pyx_t_0;
+  Py_ssize_t __pyx_t_1;
+  PyObject *(*__pyx_t_2)(PyObject *);
 };
 
 
@@ -1215,6 +1220,13 @@ static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int eq
 
 /* UnicodeEquals.proto */
 static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int equals);
+
+/* StrEquals.proto */
+#if PY_MAJOR_VERSION >= 3
+#define __Pyx_PyString_Equals __Pyx_PyUnicode_Equals
+#else
+#define __Pyx_PyString_Equals __Pyx_PyBytes_Equals
+#endif
 
 /* RaiseDoubleKeywords.proto */
 static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
@@ -1442,21 +1454,44 @@ static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name);
 /* None.proto */
 static CYTHON_INLINE void __Pyx_RaiseClosureNameError(const char *varname);
 
-/* ListCompAppend.proto */
-#if CYTHON_USE_PYLIST_INTERNALS && CYTHON_ASSUME_SAFE_MACROS
-static CYTHON_INLINE int __Pyx_ListComp_Append(PyObject* list, PyObject* x) {
-    PyListObject* L = (PyListObject*) list;
-    Py_ssize_t len = Py_SIZE(list);
-    if (likely(L->allocated > len)) {
-        Py_INCREF(x);
-        PyList_SET_ITEM(list, len, x);
-        __Pyx_SET_SIZE(list, len + 1);
-        return 0;
-    }
-    return PyList_Append(list, x);
-}
+/* StringJoin.proto */
+#if PY_MAJOR_VERSION < 3
+#define __Pyx_PyString_Join __Pyx_PyBytes_Join
+#define __Pyx_PyBaseString_Join(s, v) (PyUnicode_CheckExact(s) ? PyUnicode_Join(s, v) : __Pyx_PyBytes_Join(s, v))
 #else
-#define __Pyx_ListComp_Append(L,x) PyList_Append(L,x)
+#define __Pyx_PyString_Join PyUnicode_Join
+#define __Pyx_PyBaseString_Join PyUnicode_Join
+#endif
+#if CYTHON_COMPILING_IN_CPYTHON
+    #if PY_MAJOR_VERSION < 3
+    #define __Pyx_PyBytes_Join _PyString_Join
+    #else
+    #define __Pyx_PyBytes_Join _PyBytes_Join
+    #endif
+#else
+static CYTHON_INLINE PyObject* __Pyx_PyBytes_Join(PyObject* sep, PyObject* values);
+#endif
+
+/* PyObjectFormatSimple.proto */
+#if CYTHON_COMPILING_IN_PYPY
+    #define __Pyx_PyObject_FormatSimple(s, f) (\
+        likely(PyUnicode_CheckExact(s)) ? (Py_INCREF(s), s) :\
+        PyObject_Format(s, f))
+#elif PY_MAJOR_VERSION < 3
+    #define __Pyx_PyObject_FormatSimple(s, f) (\
+        likely(PyUnicode_CheckExact(s)) ? (Py_INCREF(s), s) :\
+        likely(PyString_CheckExact(s)) ? PyUnicode_FromEncodedObject(s, NULL, "strict") :\
+        PyObject_Format(s, f))
+#elif CYTHON_USE_TYPE_SLOTS
+    #define __Pyx_PyObject_FormatSimple(s, f) (\
+        likely(PyUnicode_CheckExact(s)) ? (Py_INCREF(s), s) :\
+        likely(PyLong_CheckExact(s)) ? PyLong_Type.tp_str(s) :\
+        likely(PyFloat_CheckExact(s)) ? PyFloat_Type.tp_str(s) :\
+        PyObject_Format(s, f))
+#else
+    #define __Pyx_PyObject_FormatSimple(s, f) (\
+        likely(PyUnicode_CheckExact(s)) ? (Py_INCREF(s), s) :\
+        PyObject_Format(s, f))
 #endif
 
 /* JoinPyUnicode.proto */
@@ -1759,12 +1794,13 @@ static PyObject *__pyx_builtin_IndexError;
 static const char __pyx_k_a[] = "a";
 static const char __pyx_k_d[] = "d";
 static const char __pyx_k_i[] = "i";
-static const char __pyx_k__5[] = "[";
-static const char __pyx_k__6[] = ", ";
-static const char __pyx_k__7[] = "]";
+static const char __pyx_k__7[] = "[";
+static const char __pyx_k__8[] = ", ";
+static const char __pyx_k__9[] = "]";
 static const char __pyx_k_obj[] = "obj";
 static const char __pyx_k_args[] = "args";
 static const char __pyx_k_item[] = "item";
+static const char __pyx_k_join[] = "join";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_send[] = "send";
@@ -1808,19 +1844,24 @@ static const char __pyx_k_str___locals_genexpr[] = "__str__.<locals>.genexpr";
 static const char __pyx_k_repr___locals_genexpr[] = "__repr__.<locals>.genexpr";
 static const char __pyx_k_pop_index_out_of_range[] = "pop index out of range";
 static const char __pyx_k_list_index_out_of_range[] = "list index out of range";
+static const char __pyx_k_Incorrect_type_of_values[] = "Incorrect type of values";
+static const char __pyx_k_Incorrect_type_of_argument[] = "Incorrect type of argument";
 static const char __pyx_k_Pyx_CFunc_int____array____size[] = "__Pyx_CFunc_int____array____size__t____object___to_py.<locals>.wrap";
 static const char __pyx_k_Pyx_CFunc_object____array____s[] = "__Pyx_CFunc_object____array____size__t___to_py.<locals>.wrap";
+static const char __pyx_k_Python_Cython_append_extend_ins[] = "\n\320\234\320\276\320\264\321\203\320\273\321\214 \320\264\320\270\320\275\320\260\320\274\320\270\321\207\320\265\321\201\320\272\320\276\320\263\320\276 \320\274\320\260\321\201\321\201\320\270\320\262\320\260, \321\200\320\265\320\260\320\273\320\270\320\267\320\276\320\262\320\260\320\275\320\275\321\213\320\271 \320\264\320\273\321\217 Python\n\320\277\321\200\320\270 \320\277\320\276\320\274\320\276\321\211\320\270 Cython\n\320\240\320\265\320\260\320\273\320\270\320\267\320\276\320\262\320\260\320\275\320\275\321\213\320\265 \320\274\320\265\321\202\320\276\320\264\321\213:\nappend, extend, insert,\nremove, pop, __len__,\n__eq__, __str__, __repr__, __sizeof__\n\320\237\321\200\320\270\320\275\320\270\320\274\320\260\320\265\321\202 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\321\217 \321\202\320\270\320\277\320\260 int, float\n\320\241\320\277\320\276\321\201\320\276\320\261 \320\270\320\275\320\270\321\206\320\270\320\260\320\273\320\270\320\267\320\260\321\206\320\270\320\270:\narray(\"i\", [...]) - \320\264\320\273\321\217 int\narray(\"d\", [...]) - \320\264\320\273\321\217 float\n";
 static const char __pyx_k_array_remove_item_item_not_in_ar[] = "array.remove(item): item not in array";
 static const char __pyx_k_self_descr_cannot_be_converted_t[] = "self.descr cannot be converted to a Python object for pickling";
+static PyObject *__pyx_kp_u_Incorrect_type_of_argument;
+static PyObject *__pyx_kp_u_Incorrect_type_of_values;
 static PyObject *__pyx_n_s_IndexError;
 static PyObject *__pyx_n_s_MemoryError;
 static PyObject *__pyx_n_s_Pyx_CFunc_int____array____size;
 static PyObject *__pyx_n_s_Pyx_CFunc_object____array____s;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_ValueError;
-static PyObject *__pyx_kp_u__5;
-static PyObject *__pyx_kp_u__6;
 static PyObject *__pyx_kp_u__7;
+static PyObject *__pyx_kp_s__8;
+static PyObject *__pyx_kp_u__9;
 static PyObject *__pyx_n_s_a;
 static PyObject *__pyx_n_s_append;
 static PyObject *__pyx_n_s_args;
@@ -1830,20 +1871,21 @@ static PyObject *__pyx_n_s_cfunc_to_py;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_close;
 static PyObject *__pyx_n_s_cython_code_my_array;
-static PyObject *__pyx_n_u_d;
+static PyObject *__pyx_n_s_d;
 static PyObject *__pyx_n_s_eq_array;
 static PyObject *__pyx_n_s_extend_array;
 static PyObject *__pyx_n_s_extend_by_array;
 static PyObject *__pyx_n_s_genexpr;
 static PyObject *__pyx_n_s_getitem;
 static PyObject *__pyx_n_s_getstate;
-static PyObject *__pyx_n_u_i;
+static PyObject *__pyx_n_s_i;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_index;
 static PyObject *__pyx_n_s_initialise;
 static PyObject *__pyx_n_s_item;
 static PyObject *__pyx_n_s_itemsize;
-static PyObject *__pyx_kp_u_list_index_out_of_range;
+static PyObject *__pyx_n_s_join;
+static PyObject *__pyx_kp_s_list_index_out_of_range;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_mem_upd;
 static PyObject *__pyx_n_s_name;
@@ -1910,20 +1952,22 @@ static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
-static PyObject *__pyx_tuple__8;
-static PyObject *__pyx_tuple__9;
+static PyObject *__pyx_tuple__5;
+static PyObject *__pyx_tuple__6;
 static PyObject *__pyx_tuple__10;
+static PyObject *__pyx_tuple__11;
 static PyObject *__pyx_tuple__12;
-static PyObject *__pyx_codeobj__11;
+static PyObject *__pyx_tuple__14;
 static PyObject *__pyx_codeobj__13;
+static PyObject *__pyx_codeobj__15;
 /* Late includes */
 
-/* "cython_code/my_array.pyx":24
+/* "cython_code/my_array.pyx":32
  *     int (*setitem)(array, size_t, object)
  * 
  * cdef object double_getitem(array a, size_t index):             # <<<<<<<<<<<<<<
- *     #        double.
- *     #  ,  Cython
+ *     """
+ *         double
  */
 
 static PyObject *__pyx_f_11cython_code_8my_array_double_getitem(struct __pyx_obj_11cython_code_8my_array_array *__pyx_v_a, size_t __pyx_v_index) {
@@ -1935,26 +1979,26 @@ static PyObject *__pyx_f_11cython_code_8my_array_double_getitem(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("double_getitem", 0);
 
-  /* "cython_code/my_array.pyx":28
- *     #  ,  Cython
- *     # double    PyObject
+  /* "cython_code/my_array.pyx":39
+ *     :return:
+ *     """
  *     return (<double *> a.data)[index]             # <<<<<<<<<<<<<<
  * 
  * cdef int double_setitem(array a, size_t index, object obj):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble((((double *)__pyx_v_a->data)[__pyx_v_index])); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((((double *)__pyx_v_a->data)[__pyx_v_index])); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cython_code/my_array.pyx":24
+  /* "cython_code/my_array.pyx":32
  *     int (*setitem)(array, size_t, object)
  * 
  * cdef object double_getitem(array a, size_t index):             # <<<<<<<<<<<<<<
- *     #        double.
- *     #  ,  Cython
+ *     """
+ *         double
  */
 
   /* function exit code */
@@ -1968,12 +2012,12 @@ static PyObject *__pyx_f_11cython_code_8my_array_double_getitem(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":30
+/* "cython_code/my_array.pyx":41
  *     return (<double *> a.data)[index]
  * 
  * cdef int double_setitem(array a, size_t index, object obj):             # <<<<<<<<<<<<<<
- *     if not isinstance(obj, int) and not isinstance(obj, float):
- *         return -1
+ *     """
+ *         double
  */
 
 static int __pyx_f_11cython_code_8my_array_double_setitem(struct __pyx_obj_11cython_code_8my_array_array *__pyx_v_a, size_t __pyx_v_index, PyObject *__pyx_v_obj) {
@@ -1989,9 +2033,9 @@ static int __pyx_f_11cython_code_8my_array_double_setitem(struct __pyx_obj_11cyt
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("double_setitem", 0);
 
-  /* "cython_code/my_array.pyx":31
- * 
- * cdef int double_setitem(array a, size_t index, object obj):
+  /* "cython_code/my_array.pyx":49
+ *     :return:   (0 - , -1 - )
+ *     """
  *     if not isinstance(obj, int) and not isinstance(obj, float):             # <<<<<<<<<<<<<<
  *         return -1
  * 
@@ -2009,8 +2053,8 @@ static int __pyx_f_11cython_code_8my_array_double_setitem(struct __pyx_obj_11cyt
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "cython_code/my_array.pyx":32
- * cdef int double_setitem(array a, size_t index, object obj):
+    /* "cython_code/my_array.pyx":50
+ *     """
  *     if not isinstance(obj, int) and not isinstance(obj, float):
  *         return -1             # <<<<<<<<<<<<<<
  * 
@@ -2019,26 +2063,26 @@ static int __pyx_f_11cython_code_8my_array_double_setitem(struct __pyx_obj_11cyt
     __pyx_r = -1;
     goto __pyx_L0;
 
-    /* "cython_code/my_array.pyx":31
- * 
- * cdef int double_setitem(array a, size_t index, object obj):
+    /* "cython_code/my_array.pyx":49
+ *     :return:   (0 - , -1 - )
+ *     """
  *     if not isinstance(obj, int) and not isinstance(obj, float):             # <<<<<<<<<<<<<<
  *         return -1
  * 
  */
   }
 
-  /* "cython_code/my_array.pyx":34
+  /* "cython_code/my_array.pyx":52
  *         return -1
  * 
  *     cdef double value = PyFloat_AsDouble(obj)             # <<<<<<<<<<<<<<
  * 
  *     if index >= 0:
  */
-  __pyx_t_4 = PyFloat_AsDouble(__pyx_v_obj); if (unlikely(__pyx_t_4 == ((double)-1.0) && PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_AsDouble(__pyx_v_obj); if (unlikely(__pyx_t_4 == ((double)-1.0) && PyErr_Occurred())) __PYX_ERR(0, 52, __pyx_L1_error)
   __pyx_v_value = __pyx_t_4;
 
-  /* "cython_code/my_array.pyx":36
+  /* "cython_code/my_array.pyx":54
  *     cdef double value = PyFloat_AsDouble(obj)
  * 
  *     if index >= 0:             # <<<<<<<<<<<<<<
@@ -2048,7 +2092,7 @@ static int __pyx_f_11cython_code_8my_array_double_setitem(struct __pyx_obj_11cyt
   __pyx_t_1 = ((__pyx_v_index >= 0) != 0);
   if (__pyx_t_1) {
 
-    /* "cython_code/my_array.pyx":37
+    /* "cython_code/my_array.pyx":55
  * 
  *     if index >= 0:
  *         (<double *> a.data)[index] = value             # <<<<<<<<<<<<<<
@@ -2057,7 +2101,7 @@ static int __pyx_f_11cython_code_8my_array_double_setitem(struct __pyx_obj_11cyt
  */
     (((double *)__pyx_v_a->data)[__pyx_v_index]) = __pyx_v_value;
 
-    /* "cython_code/my_array.pyx":36
+    /* "cython_code/my_array.pyx":54
  *     cdef double value = PyFloat_AsDouble(obj)
  * 
  *     if index >= 0:             # <<<<<<<<<<<<<<
@@ -2066,7 +2110,7 @@ static int __pyx_f_11cython_code_8my_array_double_setitem(struct __pyx_obj_11cyt
  */
   }
 
-  /* "cython_code/my_array.pyx":38
+  /* "cython_code/my_array.pyx":56
  *     if index >= 0:
  *         (<double *> a.data)[index] = value
  *     return 0             # <<<<<<<<<<<<<<
@@ -2076,12 +2120,12 @@ static int __pyx_f_11cython_code_8my_array_double_setitem(struct __pyx_obj_11cyt
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "cython_code/my_array.pyx":30
+  /* "cython_code/my_array.pyx":41
  *     return (<double *> a.data)[index]
  * 
  * cdef int double_setitem(array a, size_t index, object obj):             # <<<<<<<<<<<<<<
- *     if not isinstance(obj, int) and not isinstance(obj, float):
- *         return -1
+ *     """
+ *         double
  */
 
   /* function exit code */
@@ -2093,12 +2137,12 @@ static int __pyx_f_11cython_code_8my_array_double_setitem(struct __pyx_obj_11cyt
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":40
+/* "cython_code/my_array.pyx":58
  *     return 0
  * 
  * cdef object int_getitem(array a, size_t index):             # <<<<<<<<<<<<<<
- *     return (<int *> a.data)[index]
- * 
+ *     """
+ *         long
  */
 
 static PyObject *__pyx_f_11cython_code_8my_array_int_getitem(struct __pyx_obj_11cython_code_8my_array_array *__pyx_v_a, size_t __pyx_v_index) {
@@ -2110,26 +2154,26 @@ static PyObject *__pyx_f_11cython_code_8my_array_int_getitem(struct __pyx_obj_11
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("int_getitem", 0);
 
-  /* "cython_code/my_array.pyx":41
- * 
- * cdef object int_getitem(array a, size_t index):
+  /* "cython_code/my_array.pyx":65
+ *     :return:
+ *     """
  *     return (<int *> a.data)[index]             # <<<<<<<<<<<<<<
  * 
  * cdef int int_setitem(array a, size_t index, object obj):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int((((int *)__pyx_v_a->data)[__pyx_v_index])); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int((((int *)__pyx_v_a->data)[__pyx_v_index])); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cython_code/my_array.pyx":40
+  /* "cython_code/my_array.pyx":58
  *     return 0
  * 
  * cdef object int_getitem(array a, size_t index):             # <<<<<<<<<<<<<<
- *     return (<int *> a.data)[index]
- * 
+ *     """
+ *         long
  */
 
   /* function exit code */
@@ -2143,12 +2187,12 @@ static PyObject *__pyx_f_11cython_code_8my_array_int_getitem(struct __pyx_obj_11
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":43
+/* "cython_code/my_array.pyx":67
  *     return (<int *> a.data)[index]
  * 
  * cdef int int_setitem(array a, size_t index, object obj):             # <<<<<<<<<<<<<<
- *     if not isinstance(obj, int):
- *         return -1
+ *     """
+ *         long
  */
 
 static int __pyx_f_11cython_code_8my_array_int_setitem(struct __pyx_obj_11cython_code_8my_array_array *__pyx_v_a, size_t __pyx_v_index, PyObject *__pyx_v_obj) {
@@ -2163,9 +2207,9 @@ static int __pyx_f_11cython_code_8my_array_int_setitem(struct __pyx_obj_11cython
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("int_setitem", 0);
 
-  /* "cython_code/my_array.pyx":44
- * 
- * cdef int int_setitem(array a, size_t index, object obj):
+  /* "cython_code/my_array.pyx":75
+ *     :return:   (0 - , -1 - )
+ *     """
  *     if not isinstance(obj, int):             # <<<<<<<<<<<<<<
  *         return -1
  * 
@@ -2174,8 +2218,8 @@ static int __pyx_f_11cython_code_8my_array_int_setitem(struct __pyx_obj_11cython
   __pyx_t_2 = ((!(__pyx_t_1 != 0)) != 0);
   if (__pyx_t_2) {
 
-    /* "cython_code/my_array.pyx":45
- * cdef int int_setitem(array a, size_t index, object obj):
+    /* "cython_code/my_array.pyx":76
+ *     """
  *     if not isinstance(obj, int):
  *         return -1             # <<<<<<<<<<<<<<
  * 
@@ -2184,26 +2228,26 @@ static int __pyx_f_11cython_code_8my_array_int_setitem(struct __pyx_obj_11cython
     __pyx_r = -1;
     goto __pyx_L0;
 
-    /* "cython_code/my_array.pyx":44
- * 
- * cdef int int_setitem(array a, size_t index, object obj):
+    /* "cython_code/my_array.pyx":75
+ *     :return:   (0 - , -1 - )
+ *     """
  *     if not isinstance(obj, int):             # <<<<<<<<<<<<<<
  *         return -1
  * 
  */
   }
 
-  /* "cython_code/my_array.pyx":47
+  /* "cython_code/my_array.pyx":78
  *         return -1
  * 
  *     cdef long value = PyInt_AsLong(obj)             # <<<<<<<<<<<<<<
  * 
  *     if index >= 0:
  */
-  __pyx_t_3 = PyInt_AsLong(__pyx_v_obj); if (unlikely(__pyx_t_3 == ((long)-1L) && PyErr_Occurred())) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_3 = PyInt_AsLong(__pyx_v_obj); if (unlikely(__pyx_t_3 == ((long)-1L) && PyErr_Occurred())) __PYX_ERR(0, 78, __pyx_L1_error)
   __pyx_v_value = __pyx_t_3;
 
-  /* "cython_code/my_array.pyx":49
+  /* "cython_code/my_array.pyx":80
  *     cdef long value = PyInt_AsLong(obj)
  * 
  *     if index >= 0:             # <<<<<<<<<<<<<<
@@ -2213,7 +2257,7 @@ static int __pyx_f_11cython_code_8my_array_int_setitem(struct __pyx_obj_11cython
   __pyx_t_2 = ((__pyx_v_index >= 0) != 0);
   if (__pyx_t_2) {
 
-    /* "cython_code/my_array.pyx":50
+    /* "cython_code/my_array.pyx":81
  * 
  *     if index >= 0:
  *         (<long *> a.data)[index] = value             # <<<<<<<<<<<<<<
@@ -2222,7 +2266,7 @@ static int __pyx_f_11cython_code_8my_array_int_setitem(struct __pyx_obj_11cython
  */
     (((long *)__pyx_v_a->data)[__pyx_v_index]) = __pyx_v_value;
 
-    /* "cython_code/my_array.pyx":49
+    /* "cython_code/my_array.pyx":80
  *     cdef long value = PyInt_AsLong(obj)
  * 
  *     if index >= 0:             # <<<<<<<<<<<<<<
@@ -2231,22 +2275,22 @@ static int __pyx_f_11cython_code_8my_array_int_setitem(struct __pyx_obj_11cython
  */
   }
 
-  /* "cython_code/my_array.pyx":51
+  /* "cython_code/my_array.pyx":82
  *     if index >= 0:
  *         (<long *> a.data)[index] = value
  *     return 0             # <<<<<<<<<<<<<<
  * 
- * #         :
+ * #     long  double
  */
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "cython_code/my_array.pyx":43
+  /* "cython_code/my_array.pyx":67
  *     return (<int *> a.data)[index]
  * 
  * cdef int int_setitem(array a, size_t index, object obj):             # <<<<<<<<<<<<<<
- *     if not isinstance(obj, int):
- *         return -1
+ *     """
+ *         long
  */
 
   /* function exit code */
@@ -2258,12 +2302,12 @@ static int __pyx_f_11cython_code_8my_array_int_setitem(struct __pyx_obj_11cython
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":66
+/* "cython_code/my_array.pyx":95
+ *     LONG = 1
  * 
- * #
  * cdef int char_typecode_to_int(str typecode):             # <<<<<<<<<<<<<<
- *     if typecode == "d":
- *         return TypeCode.DOUBLE
+ *     """
+ * 
  */
 
 static int __pyx_f_11cython_code_8my_array_char_typecode_to_int(PyObject *__pyx_v_typecode) {
@@ -2276,19 +2320,19 @@ static int __pyx_f_11cython_code_8my_array_char_typecode_to_int(PyObject *__pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("char_typecode_to_int", 0);
 
-  /* "cython_code/my_array.pyx":67
- * #
- * cdef int char_typecode_to_int(str typecode):
+  /* "cython_code/my_array.pyx":101
+ *     :return: ,
+ *     """
  *     if typecode == "d":             # <<<<<<<<<<<<<<
  *         return TypeCode.DOUBLE
  *     if typecode == "i":
  */
-  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_typecode, __pyx_n_u_d, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_typecode, __pyx_n_s_d, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 101, __pyx_L1_error)
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "cython_code/my_array.pyx":68
- * cdef int char_typecode_to_int(str typecode):
+    /* "cython_code/my_array.pyx":102
+ *     """
  *     if typecode == "d":
  *         return TypeCode.DOUBLE             # <<<<<<<<<<<<<<
  *     if typecode == "i":
@@ -2297,27 +2341,27 @@ static int __pyx_f_11cython_code_8my_array_char_typecode_to_int(PyObject *__pyx_
     __pyx_r = __pyx_e_11cython_code_8my_array_DOUBLE;
     goto __pyx_L0;
 
-    /* "cython_code/my_array.pyx":67
- * #
- * cdef int char_typecode_to_int(str typecode):
+    /* "cython_code/my_array.pyx":101
+ *     :return: ,
+ *     """
  *     if typecode == "d":             # <<<<<<<<<<<<<<
  *         return TypeCode.DOUBLE
  *     if typecode == "i":
  */
   }
 
-  /* "cython_code/my_array.pyx":69
+  /* "cython_code/my_array.pyx":103
  *     if typecode == "d":
  *         return TypeCode.DOUBLE
  *     if typecode == "i":             # <<<<<<<<<<<<<<
  *         return TypeCode.LONG
  *     return -1
  */
-  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_typecode, __pyx_n_u_i, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_v_typecode, __pyx_n_s_i, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 103, __pyx_L1_error)
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
-    /* "cython_code/my_array.pyx":70
+    /* "cython_code/my_array.pyx":104
  *         return TypeCode.DOUBLE
  *     if typecode == "i":
  *         return TypeCode.LONG             # <<<<<<<<<<<<<<
@@ -2327,7 +2371,7 @@ static int __pyx_f_11cython_code_8my_array_char_typecode_to_int(PyObject *__pyx_
     __pyx_r = __pyx_e_11cython_code_8my_array_LONG;
     goto __pyx_L0;
 
-    /* "cython_code/my_array.pyx":69
+    /* "cython_code/my_array.pyx":103
  *     if typecode == "d":
  *         return TypeCode.DOUBLE
  *     if typecode == "i":             # <<<<<<<<<<<<<<
@@ -2336,22 +2380,22 @@ static int __pyx_f_11cython_code_8my_array_char_typecode_to_int(PyObject *__pyx_
  */
   }
 
-  /* "cython_code/my_array.pyx":71
+  /* "cython_code/my_array.pyx":105
  *     if typecode == "i":
  *         return TypeCode.LONG
  *     return -1             # <<<<<<<<<<<<<<
  * 
- * 
+ * cdef long index_validate(long index, long length):
  */
   __pyx_r = -1;
   goto __pyx_L0;
 
-  /* "cython_code/my_array.pyx":66
+  /* "cython_code/my_array.pyx":95
+ *     LONG = 1
  * 
- * #
  * cdef int char_typecode_to_int(str typecode):             # <<<<<<<<<<<<<<
- *     if typecode == "d":
- *         return TypeCode.DOUBLE
+ *     """
+ * 
  */
 
   /* function exit code */
@@ -2363,12 +2407,12 @@ static int __pyx_f_11cython_code_8my_array_char_typecode_to_int(PyObject *__pyx_
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":74
- * 
+/* "cython_code/my_array.pyx":107
+ *     return -1
  * 
  * cdef long index_validate(long index, long length):             # <<<<<<<<<<<<<<
- *     if length == 0 and index < 0:
- *         return 0
+ *     """
+ *       (     )
  */
 
 static long __pyx_f_11cython_code_8my_array_index_validate(long __pyx_v_index, long __pyx_v_length) {
@@ -2378,9 +2422,9 @@ static long __pyx_f_11cython_code_8my_array_index_validate(long __pyx_v_index, l
   int __pyx_t_2;
   __Pyx_RefNannySetupContext("index_validate", 0);
 
-  /* "cython_code/my_array.pyx":75
- * 
- * cdef long index_validate(long index, long length):
+  /* "cython_code/my_array.pyx":114
+ *     :return:
+ *     """
  *     if length == 0 and index < 0:             # <<<<<<<<<<<<<<
  *         return 0
  *     if index < 0:
@@ -2396,8 +2440,8 @@ static long __pyx_f_11cython_code_8my_array_index_validate(long __pyx_v_index, l
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "cython_code/my_array.pyx":76
- * cdef long index_validate(long index, long length):
+    /* "cython_code/my_array.pyx":115
+ *     """
  *     if length == 0 and index < 0:
  *         return 0             # <<<<<<<<<<<<<<
  *     if index < 0:
@@ -2406,16 +2450,16 @@ static long __pyx_f_11cython_code_8my_array_index_validate(long __pyx_v_index, l
     __pyx_r = 0;
     goto __pyx_L0;
 
-    /* "cython_code/my_array.pyx":75
- * 
- * cdef long index_validate(long index, long length):
+    /* "cython_code/my_array.pyx":114
+ *     :return:
+ *     """
  *     if length == 0 and index < 0:             # <<<<<<<<<<<<<<
  *         return 0
  *     if index < 0:
  */
   }
 
-  /* "cython_code/my_array.pyx":77
+  /* "cython_code/my_array.pyx":116
  *     if length == 0 and index < 0:
  *         return 0
  *     if index < 0:             # <<<<<<<<<<<<<<
@@ -2425,7 +2469,7 @@ static long __pyx_f_11cython_code_8my_array_index_validate(long __pyx_v_index, l
   __pyx_t_1 = ((__pyx_v_index < 0) != 0);
   if (__pyx_t_1) {
 
-    /* "cython_code/my_array.pyx":78
+    /* "cython_code/my_array.pyx":117
  *         return 0
  *     if index < 0:
  *         return length + index             # <<<<<<<<<<<<<<
@@ -2435,7 +2479,7 @@ static long __pyx_f_11cython_code_8my_array_index_validate(long __pyx_v_index, l
     __pyx_r = (__pyx_v_length + __pyx_v_index);
     goto __pyx_L0;
 
-    /* "cython_code/my_array.pyx":77
+    /* "cython_code/my_array.pyx":116
  *     if length == 0 and index < 0:
  *         return 0
  *     if index < 0:             # <<<<<<<<<<<<<<
@@ -2444,22 +2488,22 @@ static long __pyx_f_11cython_code_8my_array_index_validate(long __pyx_v_index, l
  */
   }
 
-  /* "cython_code/my_array.pyx":79
+  /* "cython_code/my_array.pyx":118
  *     if index < 0:
  *         return length + index
  *     return index             # <<<<<<<<<<<<<<
  * 
- * 
+ * cdef class array:
  */
   __pyx_r = __pyx_v_index;
   goto __pyx_L0;
 
-  /* "cython_code/my_array.pyx":74
- * 
+  /* "cython_code/my_array.pyx":107
+ *     return -1
  * 
  * cdef long index_validate(long index, long length):             # <<<<<<<<<<<<<<
- *     if length == 0 and index < 0:
- *         return 0
+ *     """
+ *       (     )
  */
 
   /* function exit code */
@@ -2468,16 +2512,20 @@ static long __pyx_f_11cython_code_8my_array_index_validate(long __pyx_v_index, l
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":94
+/* "cython_code/my_array.pyx":129
  *     cdef arraydescr * descr
  * 
  *     def __init__(self, str typecode, initialise=None):             # <<<<<<<<<<<<<<
- *         if initialise is None:
- *             initialise = []
+ *         """
+ * 
  */
 
 /* Python wrapper */
 static int __pyx_pw_11cython_code_8my_array_5array_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array___init__[] = "\n        \320\232\320\276\320\275\321\201\321\202\321\200\321\203\320\272\321\202\320\276\321\200 \321\215\320\272\320\267\320\265\320\274\320\277\320\273\321\217\321\200\320\260 \320\274\320\260\321\201\321\201\320\270\320\262\320\260\n        :param typecode: \"i\" \320\265\321\201\320\273\320\270 \320\274\320\260\321\201\321\201\320\270\320\262 \321\201 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\321\217\320\274\320\270 \321\202\320\270\320\277\320\260 \"int\", \"d\" \320\265\321\201\320\273\320\270 float (double)\n        :param initialise: Iterable \320\276\320\261\321\212\320\265\320\272\321\202 \320\264\320\273\321\217 \320\270\320\275\320\270\321\206\320\270\320\260\320\273\320\270\320\267\320\260\321\206\320\270\320\270 \320\270\321\201\321\205\320\276\320\264\320\275\321\213\321\205 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\271 \320\274\320\260\321\201\321\201\320\270\320\262\320\260\n        ";
+#if CYTHON_UPDATE_DESCRIPTOR_DOC
+struct wrapperbase __pyx_wrapperbase_11cython_code_8my_array_5array___init__;
+#endif
 static int __pyx_pw_11cython_code_8my_array_5array_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_typecode = 0;
   PyObject *__pyx_v_initialise = 0;
@@ -2515,7 +2563,7 @@ static int __pyx_pw_11cython_code_8my_array_5array_1__init__(PyObject *__pyx_v_s
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 94, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 129, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2531,13 +2579,13 @@ static int __pyx_pw_11cython_code_8my_array_5array_1__init__(PyObject *__pyx_v_s
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 94, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 129, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("cython_code.my_array.array.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_typecode), (&PyUnicode_Type), 1, "typecode", 1))) __PYX_ERR(0, 94, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_typecode), (&PyString_Type), 1, "typecode", 1))) __PYX_ERR(0, 129, __pyx_L1_error)
   __pyx_r = __pyx_pf_11cython_code_8my_array_5array___init__(((struct __pyx_obj_11cython_code_8my_array_array *)__pyx_v_self), __pyx_v_typecode, __pyx_v_initialise);
 
   /* function exit code */
@@ -2567,60 +2615,60 @@ static int __pyx_pf_11cython_code_8my_array_5array___init__(struct __pyx_obj_11c
   __Pyx_RefNannySetupContext("__init__", 0);
   __Pyx_INCREF(__pyx_v_initialise);
 
-  /* "cython_code/my_array.pyx":95
- * 
- *     def __init__(self, str typecode, initialise=None):
+  /* "cython_code/my_array.pyx":135
+ *         :param initialise: Iterable
+ *         """
  *         if initialise is None:             # <<<<<<<<<<<<<<
  *             initialise = []
- *         self.size = len(initialise) #
+ *         self.size = len(initialise)  #
  */
   __pyx_t_1 = (__pyx_v_initialise == Py_None);
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "cython_code/my_array.pyx":96
- *     def __init__(self, str typecode, initialise=None):
+    /* "cython_code/my_array.pyx":136
+ *         """
  *         if initialise is None:
  *             initialise = []             # <<<<<<<<<<<<<<
- *         self.size = len(initialise) #
- *         self.length = len(initialise) # -
+ *         self.size = len(initialise)  #
+ *         self.length = len(initialise)  # -
  */
-    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 96, __pyx_L1_error)
+    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF_SET(__pyx_v_initialise, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "cython_code/my_array.pyx":95
- * 
- *     def __init__(self, str typecode, initialise=None):
+    /* "cython_code/my_array.pyx":135
+ *         :param initialise: Iterable
+ *         """
  *         if initialise is None:             # <<<<<<<<<<<<<<
  *             initialise = []
- *         self.size = len(initialise) #
+ *         self.size = len(initialise)  #
  */
   }
 
-  /* "cython_code/my_array.pyx":97
+  /* "cython_code/my_array.pyx":137
  *         if initialise is None:
  *             initialise = []
- *         self.size = len(initialise) #             # <<<<<<<<<<<<<<
- *         self.length = len(initialise) # -
+ *         self.size = len(initialise)  #             # <<<<<<<<<<<<<<
+ *         self.length = len(initialise)  # -
  * 
  */
-  __pyx_t_4 = PyObject_Length(__pyx_v_initialise); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 97, __pyx_L1_error)
+  __pyx_t_4 = PyObject_Length(__pyx_v_initialise); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 137, __pyx_L1_error)
   __pyx_v_self->size = __pyx_t_4;
 
-  /* "cython_code/my_array.pyx":98
+  /* "cython_code/my_array.pyx":138
  *             initialise = []
- *         self.size = len(initialise) #
- *         self.length = len(initialise) # -             # <<<<<<<<<<<<<<
+ *         self.size = len(initialise)  #
+ *         self.length = len(initialise)  # -             # <<<<<<<<<<<<<<
  * 
  *         cdef int mtypecode = char_typecode_to_int(typecode)
  */
-  __pyx_t_4 = PyObject_Length(__pyx_v_initialise); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_4 = PyObject_Length(__pyx_v_initialise); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 138, __pyx_L1_error)
   __pyx_v_self->length = __pyx_t_4;
 
-  /* "cython_code/my_array.pyx":100
- *         self.length = len(initialise) # -
+  /* "cython_code/my_array.pyx":140
+ *         self.length = len(initialise)  # -
  * 
  *         cdef int mtypecode = char_typecode_to_int(typecode)             # <<<<<<<<<<<<<<
  *         self.descr = &descriptors[mtypecode]
@@ -2628,7 +2676,7 @@ static int __pyx_pf_11cython_code_8my_array_5array___init__(struct __pyx_obj_11c
  */
   __pyx_v_mtypecode = __pyx_f_11cython_code_8my_array_char_typecode_to_int(__pyx_v_typecode);
 
-  /* "cython_code/my_array.pyx":101
+  /* "cython_code/my_array.pyx":141
  * 
  *         cdef int mtypecode = char_typecode_to_int(typecode)
  *         self.descr = &descriptors[mtypecode]             # <<<<<<<<<<<<<<
@@ -2637,7 +2685,7 @@ static int __pyx_pf_11cython_code_8my_array_5array___init__(struct __pyx_obj_11c
  */
   __pyx_v_self->descr = (&(__pyx_v_11cython_code_8my_array_descriptors[__pyx_v_mtypecode]));
 
-  /* "cython_code/my_array.pyx":104
+  /* "cython_code/my_array.pyx":144
  * 
  *         #
  *         self.data = <char *> PyMem_Malloc(self.length * self.descr.itemsize)             # <<<<<<<<<<<<<<
@@ -2646,7 +2694,7 @@ static int __pyx_pf_11cython_code_8my_array_5array___init__(struct __pyx_obj_11c
  */
   __pyx_v_self->data = ((char *)PyMem_Malloc((__pyx_v_self->length * __pyx_v_self->descr->itemsize)));
 
-  /* "cython_code/my_array.pyx":105
+  /* "cython_code/my_array.pyx":145
  *         #
  *         self.data = <char *> PyMem_Malloc(self.length * self.descr.itemsize)
  *         if not self.data:             # <<<<<<<<<<<<<<
@@ -2656,16 +2704,16 @@ static int __pyx_pf_11cython_code_8my_array_5array___init__(struct __pyx_obj_11c
   __pyx_t_2 = ((!(__pyx_v_self->data != 0)) != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "cython_code/my_array.pyx":106
+    /* "cython_code/my_array.pyx":146
  *         self.data = <char *> PyMem_Malloc(self.length * self.descr.itemsize)
  *         if not self.data:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         for i in range(self.length):
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 106, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 146, __pyx_L1_error)
 
-    /* "cython_code/my_array.pyx":105
+    /* "cython_code/my_array.pyx":145
  *         #
  *         self.data = <char *> PyMem_Malloc(self.length * self.descr.itemsize)
  *         if not self.data:             # <<<<<<<<<<<<<<
@@ -2674,7 +2722,7 @@ static int __pyx_pf_11cython_code_8my_array_5array___init__(struct __pyx_obj_11c
  */
   }
 
-  /* "cython_code/my_array.pyx":108
+  /* "cython_code/my_array.pyx":148
  *             raise MemoryError()
  * 
  *         for i in range(self.length):             # <<<<<<<<<<<<<<
@@ -2686,25 +2734,25 @@ static int __pyx_pf_11cython_code_8my_array_5array___init__(struct __pyx_obj_11c
   for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
     __pyx_v_i = __pyx_t_7;
 
-    /* "cython_code/my_array.pyx":109
+    /* "cython_code/my_array.pyx":149
  * 
  *         for i in range(self.length):
  *             self[i] = initialise[i]             # <<<<<<<<<<<<<<
  * 
  *     def extend_array(self) -> None:
  */
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_initialise, __pyx_v_i, size_t, 0, __Pyx_PyInt_FromSize_t, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_initialise, __pyx_v_i, size_t, 0, __Pyx_PyInt_FromSize_t, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_self), __pyx_v_i, __pyx_t_3, size_t, 0, __Pyx_PyInt_FromSize_t, 0, 0, 1) < 0)) __PYX_ERR(0, 109, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_self), __pyx_v_i, __pyx_t_3, size_t, 0, __Pyx_PyInt_FromSize_t, 0, 0, 1) < 0)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
 
-  /* "cython_code/my_array.pyx":94
+  /* "cython_code/my_array.pyx":129
  *     cdef arraydescr * descr
  * 
  *     def __init__(self, str typecode, initialise=None):             # <<<<<<<<<<<<<<
- *         if initialise is None:
- *             initialise = []
+ *         """
+ * 
  */
 
   /* function exit code */
@@ -2720,16 +2768,17 @@ static int __pyx_pf_11cython_code_8my_array_5array___init__(struct __pyx_obj_11c
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":111
+/* "cython_code/my_array.pyx":151
  *             self[i] = initialise[i]
  * 
  *     def extend_array(self) -> None:             # <<<<<<<<<<<<<<
- *         if self.length == self.size:
- *             if self.length:
+ *         """
+ *          -
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_3extend_array(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_2extend_array[] = "\n        \320\243\320\262\320\265\320\273\320\270\321\207\320\265\320\275\320\270\320\265 \320\272\320\276\320\273-\320\262\320\260 \320\262\321\213\320\264\320\265\320\273\321\217\320\265\320\274\320\276\320\271 \320\264\320\273\321\217 \320\274\320\260\321\201\321\201\320\270\320\262\320\260 \320\277\320\260\320\274\321\217\321\202\320\270 \320\262\320\264\320\262\320\276\320\265\n        ";
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_3extend_array(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -2753,9 +2802,9 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_2extend_array(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("extend_array", 0);
 
-  /* "cython_code/my_array.pyx":112
- * 
- *     def extend_array(self) -> None:
+  /* "cython_code/my_array.pyx":155
+ *          -
+ *         """
  *         if self.length == self.size:             # <<<<<<<<<<<<<<
  *             if self.length:
  *                 self.size *= 2
@@ -2763,8 +2812,8 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_2extend_array(struct __
   __pyx_t_1 = ((__pyx_v_self->length == __pyx_v_self->size) != 0);
   if (__pyx_t_1) {
 
-    /* "cython_code/my_array.pyx":113
- *     def extend_array(self) -> None:
+    /* "cython_code/my_array.pyx":156
+ *         """
  *         if self.length == self.size:
  *             if self.length:             # <<<<<<<<<<<<<<
  *                 self.size *= 2
@@ -2773,7 +2822,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_2extend_array(struct __
     __pyx_t_1 = (__pyx_v_self->length != 0);
     if (__pyx_t_1) {
 
-      /* "cython_code/my_array.pyx":114
+      /* "cython_code/my_array.pyx":157
  *         if self.length == self.size:
  *             if self.length:
  *                 self.size *= 2             # <<<<<<<<<<<<<<
@@ -2782,8 +2831,8 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_2extend_array(struct __
  */
       __pyx_v_self->size = (__pyx_v_self->size * 2);
 
-      /* "cython_code/my_array.pyx":113
- *     def extend_array(self) -> None:
+      /* "cython_code/my_array.pyx":156
+ *         """
  *         if self.length == self.size:
  *             if self.length:             # <<<<<<<<<<<<<<
  *                 self.size *= 2
@@ -2792,7 +2841,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_2extend_array(struct __
       goto __pyx_L4;
     }
 
-    /* "cython_code/my_array.pyx":116
+    /* "cython_code/my_array.pyx":159
  *                 self.size *= 2
  *             else:
  *                 self.size = 1             # <<<<<<<<<<<<<<
@@ -2804,14 +2853,14 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_2extend_array(struct __
     }
     __pyx_L4:;
 
-    /* "cython_code/my_array.pyx":117
+    /* "cython_code/my_array.pyx":160
  *             else:
  *                 self.size = 1
  *             self.mem_upd()             # <<<<<<<<<<<<<<
  * 
  *     def extend_by_array(self, object ext_arr) -> None:
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_mem_upd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 117, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_mem_upd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 160, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -2825,26 +2874,26 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_2extend_array(struct __
     }
     __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 117, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "cython_code/my_array.pyx":112
- * 
- *     def extend_array(self) -> None:
+    /* "cython_code/my_array.pyx":155
+ *          -
+ *         """
  *         if self.length == self.size:             # <<<<<<<<<<<<<<
  *             if self.length:
  *                 self.size *= 2
  */
   }
 
-  /* "cython_code/my_array.pyx":111
+  /* "cython_code/my_array.pyx":151
  *             self[i] = initialise[i]
  * 
  *     def extend_array(self) -> None:             # <<<<<<<<<<<<<<
- *         if self.length == self.size:
- *             if self.length:
+ *         """
+ *          -
  */
 
   /* function exit code */
@@ -2862,16 +2911,17 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_2extend_array(struct __
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":119
+/* "cython_code/my_array.pyx":162
  *             self.mem_upd()
  * 
  *     def extend_by_array(self, object ext_arr) -> None:             # <<<<<<<<<<<<<<
- *         if not isinstance(ext_arr, array):
- *             raise TypeError
+ *         """
+ * 
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_5extend_by_array(PyObject *__pyx_v_self, PyObject *__pyx_v_ext_arr); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_4extend_by_array[] = "\n        \320\230\320\267\320\274\320\265\320\275\320\265\320\275\320\270\320\265 \320\272\320\276\320\273\320\270\321\207\320\265\321\201\321\202\320\262\320\260 \320\277\320\260\320\274\321\217\321\202\320\270 \320\275\320\260 \321\200\320\260\320\267\320\274\320\265\321\200 \320\277\320\265\321\200\320\265\320\264\320\260\320\275\320\275\320\276\320\263\320\276 \320\272\320\260\320\272 \320\260\321\200\320\263\321\203\320\274\320\265\320\275\321\202 \320\274\320\260\321\201\321\201\320\270\320\262\320\260\n        :param ext_arr: \320\274\320\260\321\201\321\201\320\270\320\262, \320\275\320\260 \321\200\320\260\320\267\320\274\320\265\321\200 \320\272\320\276\321\202\320\276\321\200\320\276\320\263\320\276 \321\203\320\262\320\265\320\273\320\270\321\207\320\270\320\262\320\260\320\265\320\274 \321\202\320\265\320\272\321\203\321\211\320\270\320\271 \320\274\320\260\321\201\321\201\320\270\320\262\n        ";
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_5extend_by_array(PyObject *__pyx_v_self, PyObject *__pyx_v_ext_arr) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -2897,9 +2947,9 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_4extend_by_array(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("extend_by_array", 0);
 
-  /* "cython_code/my_array.pyx":120
- * 
- *     def extend_by_array(self, object ext_arr) -> None:
+  /* "cython_code/my_array.pyx":167
+ *         :param ext_arr: ,
+ *         """
  *         if not isinstance(ext_arr, array):             # <<<<<<<<<<<<<<
  *             raise TypeError
  *         self.size += ext_arr.size
@@ -2908,52 +2958,52 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_4extend_by_array(struct
   __pyx_t_2 = ((!(__pyx_t_1 != 0)) != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "cython_code/my_array.pyx":121
- *     def extend_by_array(self, object ext_arr) -> None:
+    /* "cython_code/my_array.pyx":168
+ *         """
  *         if not isinstance(ext_arr, array):
  *             raise TypeError             # <<<<<<<<<<<<<<
  *         self.size += ext_arr.size
  *         self.mem_upd()
  */
     __Pyx_Raise(__pyx_builtin_TypeError, 0, 0, 0);
-    __PYX_ERR(0, 121, __pyx_L1_error)
+    __PYX_ERR(0, 168, __pyx_L1_error)
 
-    /* "cython_code/my_array.pyx":120
- * 
- *     def extend_by_array(self, object ext_arr) -> None:
+    /* "cython_code/my_array.pyx":167
+ *         :param ext_arr: ,
+ *         """
  *         if not isinstance(ext_arr, array):             # <<<<<<<<<<<<<<
  *             raise TypeError
  *         self.size += ext_arr.size
  */
   }
 
-  /* "cython_code/my_array.pyx":122
+  /* "cython_code/my_array.pyx":169
  *         if not isinstance(ext_arr, array):
  *             raise TypeError
  *         self.size += ext_arr.size             # <<<<<<<<<<<<<<
  *         self.mem_upd()
  * 
  */
-  __pyx_t_3 = __Pyx_PyInt_FromSize_t(__pyx_v_self->size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_FromSize_t(__pyx_v_self->size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_ext_arr, __pyx_n_s_size); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_ext_arr, __pyx_n_s_size); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyNumber_InPlaceAdd(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_t_5 = PyNumber_InPlaceAdd(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_6 = __Pyx_PyInt_As_size_t(__pyx_t_5); if (unlikely((__pyx_t_6 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyInt_As_size_t(__pyx_t_5); if (unlikely((__pyx_t_6 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_self->size = __pyx_t_6;
 
-  /* "cython_code/my_array.pyx":123
+  /* "cython_code/my_array.pyx":170
  *             raise TypeError
  *         self.size += ext_arr.size
  *         self.mem_upd()             # <<<<<<<<<<<<<<
  * 
- * 
+ *     def shorten_array(self) -> None:
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_mem_upd); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_mem_upd); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -2967,17 +3017,17 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_4extend_by_array(struct
   }
   __pyx_t_5 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 123, __pyx_L1_error)
+  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cython_code/my_array.pyx":119
+  /* "cython_code/my_array.pyx":162
  *             self.mem_upd()
  * 
  *     def extend_by_array(self, object ext_arr) -> None:             # <<<<<<<<<<<<<<
- *         if not isinstance(ext_arr, array):
- *             raise TypeError
+ *         """
+ * 
  */
 
   /* function exit code */
@@ -2995,16 +3045,17 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_4extend_by_array(struct
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":126
- * 
+/* "cython_code/my_array.pyx":172
+ *         self.mem_upd()
  * 
  *     def shorten_array(self) -> None:             # <<<<<<<<<<<<<<
- *         if self.length <= self.size // 2:
- *             self.size = self.size // 2
+ *         """
+ *          -
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_7shorten_array(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_6shorten_array[] = "\n        \320\243\320\274\320\265\320\275\321\214\321\210\320\265\320\275\320\270\320\265 \320\272\320\276\320\273-\320\262\320\260 \320\262\321\213\320\264\320\265\320\273\321\217\320\265\320\274\320\276\320\271 \320\264\320\273\321\217 \320\274\320\260\321\201\321\201\320\270\320\262\320\260 \320\277\320\260\320\274\321\217\321\202\320\270 \320\262\320\264\320\262\320\276\320\265\n        ";
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_7shorten_array(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -3028,9 +3079,9 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_6shorten_array(struct _
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("shorten_array", 0);
 
-  /* "cython_code/my_array.pyx":127
- * 
- *     def shorten_array(self) -> None:
+  /* "cython_code/my_array.pyx":176
+ *          -
+ *         """
  *         if self.length <= self.size // 2:             # <<<<<<<<<<<<<<
  *             self.size = self.size // 2
  *             self.mem_upd()
@@ -3038,8 +3089,8 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_6shorten_array(struct _
   __pyx_t_1 = ((__pyx_v_self->length <= (__pyx_v_self->size / 2)) != 0);
   if (__pyx_t_1) {
 
-    /* "cython_code/my_array.pyx":128
- *     def shorten_array(self) -> None:
+    /* "cython_code/my_array.pyx":177
+ *         """
  *         if self.length <= self.size // 2:
  *             self.size = self.size // 2             # <<<<<<<<<<<<<<
  *             self.mem_upd()
@@ -3047,14 +3098,14 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_6shorten_array(struct _
  */
     __pyx_v_self->size = (__pyx_v_self->size / 2);
 
-    /* "cython_code/my_array.pyx":129
+    /* "cython_code/my_array.pyx":178
  *         if self.length <= self.size // 2:
  *             self.size = self.size // 2
  *             self.mem_upd()             # <<<<<<<<<<<<<<
  * 
  *     def mem_upd(self) -> None:
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_mem_upd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_mem_upd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -3068,26 +3119,26 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_6shorten_array(struct _
     }
     __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 129, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "cython_code/my_array.pyx":127
- * 
- *     def shorten_array(self) -> None:
+    /* "cython_code/my_array.pyx":176
+ *          -
+ *         """
  *         if self.length <= self.size // 2:             # <<<<<<<<<<<<<<
  *             self.size = self.size // 2
  *             self.mem_upd()
  */
   }
 
-  /* "cython_code/my_array.pyx":126
- * 
+  /* "cython_code/my_array.pyx":172
+ *         self.mem_upd()
  * 
  *     def shorten_array(self) -> None:             # <<<<<<<<<<<<<<
- *         if self.length <= self.size // 2:
- *             self.size = self.size // 2
+ *         """
+ *          -
  */
 
   /* function exit code */
@@ -3105,16 +3156,17 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_6shorten_array(struct _
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":131
+/* "cython_code/my_array.pyx":180
  *             self.mem_upd()
  * 
  *     def mem_upd(self) -> None:             # <<<<<<<<<<<<<<
- *         self.data = <char *> PyMem_Realloc(self.data, self.size * self.descr.itemsize)
- * 
+ *         """
+ *          ,     size
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_9mem_upd(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_8mem_upd[] = "\n        \320\240\320\260\321\201\321\210\320\270\321\200\320\265\320\275\320\270\320\265 \320\274\320\260\321\201\321\201\320\270\320\262\320\260, \321\201 \321\203\321\207\320\265\321\202\320\276\320\274 \320\275\320\276\320\262\320\276\320\263\320\276 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\321\217 size\n        ";
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_9mem_upd(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -3131,21 +3183,21 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_8mem_upd(struct __pyx_o
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("mem_upd", 0);
 
-  /* "cython_code/my_array.pyx":132
- * 
- *     def mem_upd(self) -> None:
+  /* "cython_code/my_array.pyx":184
+ *          ,     size
+ *         """
  *         self.data = <char *> PyMem_Realloc(self.data, self.size * self.descr.itemsize)             # <<<<<<<<<<<<<<
  * 
  *     def append(self, object item) -> None:
  */
   __pyx_v_self->data = ((char *)PyMem_Realloc(__pyx_v_self->data, (__pyx_v_self->size * __pyx_v_self->descr->itemsize)));
 
-  /* "cython_code/my_array.pyx":131
+  /* "cython_code/my_array.pyx":180
  *             self.mem_upd()
  * 
  *     def mem_upd(self) -> None:             # <<<<<<<<<<<<<<
- *         self.data = <char *> PyMem_Realloc(self.data, self.size * self.descr.itemsize)
- * 
+ *         """
+ *          ,     size
  */
 
   /* function exit code */
@@ -3155,16 +3207,17 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_8mem_upd(struct __pyx_o
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":134
+/* "cython_code/my_array.pyx":186
  *         self.data = <char *> PyMem_Realloc(self.data, self.size * self.descr.itemsize)
  * 
  *     def append(self, object item) -> None:             # <<<<<<<<<<<<<<
- *         self.extend_array()
- *         self.descr.setitem(self, self.length, item)
+ *         """
+ * 
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_11append(PyObject *__pyx_v_self, PyObject *__pyx_v_item); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_10append[] = "\n        \320\224\320\276\320\261\320\260\320\262\320\273\320\265\320\275\320\270\320\265 \320\275\320\276\320\262\320\276\320\263\320\276 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\320\260 \320\262 \320\272\320\276\320\275\320\265\321\206 \320\274\320\260\321\201\321\201\320\270\320\262\320\260\n        :param item: \320\264\320\276\320\261\320\260\320\262\320\273\321\217\320\265\320\274\321\213\320\271 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\n        ";
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_11append(PyObject *__pyx_v_self, PyObject *__pyx_v_item) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -3187,14 +3240,14 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_10append(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("append", 0);
 
-  /* "cython_code/my_array.pyx":135
- * 
- *     def append(self, object item) -> None:
+  /* "cython_code/my_array.pyx":191
+ *         :param item:
+ *         """
  *         self.extend_array()             # <<<<<<<<<<<<<<
  *         self.descr.setitem(self, self.length, item)
  *         self.length += 1
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_extend_array); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_extend_array); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 191, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3208,13 +3261,13 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_10append(struct __pyx_o
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 191, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cython_code/my_array.pyx":136
- *     def append(self, object item) -> None:
+  /* "cython_code/my_array.pyx":192
+ *         """
  *         self.extend_array()
  *         self.descr.setitem(self, self.length, item)             # <<<<<<<<<<<<<<
  *         self.length += 1
@@ -3222,21 +3275,21 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_10append(struct __pyx_o
  */
   (void)(__pyx_v_self->descr->setitem(__pyx_v_self, __pyx_v_self->length, __pyx_v_item));
 
-  /* "cython_code/my_array.pyx":137
+  /* "cython_code/my_array.pyx":193
  *         self.extend_array()
  *         self.descr.setitem(self, self.length, item)
  *         self.length += 1             # <<<<<<<<<<<<<<
  * 
- *     def extend(self, array ext_arr) -> None:
+ *     def extend(self, ext_arr: array) -> None:
  */
   __pyx_v_self->length = (__pyx_v_self->length + 1);
 
-  /* "cython_code/my_array.pyx":134
+  /* "cython_code/my_array.pyx":186
  *         self.data = <char *> PyMem_Realloc(self.data, self.size * self.descr.itemsize)
  * 
  *     def append(self, object item) -> None:             # <<<<<<<<<<<<<<
- *         self.extend_array()
- *         self.descr.setitem(self, self.length, item)
+ *         """
+ * 
  */
 
   /* function exit code */
@@ -3254,16 +3307,17 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_10append(struct __pyx_o
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":139
+/* "cython_code/my_array.pyx":195
  *         self.length += 1
  * 
- *     def extend(self, array ext_arr) -> None:             # <<<<<<<<<<<<<<
- *         self.extend_by_array(ext_arr)
- *         cdef long i
+ *     def extend(self, ext_arr: array) -> None:             # <<<<<<<<<<<<<<
+ *         """
+ * 
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_13extend(PyObject *__pyx_v_self, PyObject *__pyx_v_ext_arr); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_12extend[] = "\n        \320\240\320\260\321\201\321\210\320\270\321\200\320\265\320\275\320\270\320\265 \320\274\320\260\321\201\321\201\320\270\320\262\320\260 \320\264\321\200\321\203\320\263\320\270\320\274 \320\274\320\260\321\201\321\201\320\270\320\262\320\276\320\274 \321\202\320\276\320\263\320\276 \320\266\320\265 \321\202\320\270\320\277\320\260\n        :param ext_arr: \320\274\320\260\321\201\321\201\320\270\320\262, \320\272\320\276\321\202\320\276\321\200\321\213\320\274 \321\200\320\260\321\201\321\210\320\270\321\200\321\217\320\265\320\274\n        ";
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_13extend(PyObject *__pyx_v_self, PyObject *__pyx_v_ext_arr) {
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -3271,7 +3325,7 @@ static PyObject *__pyx_pw_11cython_code_8my_array_5array_13extend(PyObject *__py
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("extend (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_ext_arr), __pyx_ptype_11cython_code_8my_array_array, 1, "ext_arr", 0))) __PYX_ERR(0, 139, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_ext_arr), __pyx_ptype_11cython_code_8my_array_array, 1, "ext_arr", 0))) __PYX_ERR(0, 195, __pyx_L1_error)
   __pyx_r = __pyx_pf_11cython_code_8my_array_5array_12extend(((struct __pyx_obj_11cython_code_8my_array_array *)__pyx_v_self), ((struct __pyx_obj_11cython_code_8my_array_array *)__pyx_v_ext_arr));
 
   /* function exit code */
@@ -3287,68 +3341,135 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_12extend(struct __pyx_o
   long __pyx_v_i;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
+  int __pyx_t_1;
+  int __pyx_t_2;
   PyObject *__pyx_t_3 = NULL;
-  Py_ssize_t __pyx_t_4;
-  Py_ssize_t __pyx_t_5;
-  long __pyx_t_6;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  Py_ssize_t __pyx_t_6;
+  Py_ssize_t __pyx_t_7;
+  long __pyx_t_8;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("extend", 0);
 
-  /* "cython_code/my_array.pyx":140
- * 
- *     def extend(self, array ext_arr) -> None:
+  /* "cython_code/my_array.pyx":200
+ *         :param ext_arr: ,
+ *         """
+ *         if not isinstance(ext_arr, array):             # <<<<<<<<<<<<<<
+ *             raise TypeError(f"Incorrect type of argument")
+ *         if self.descr != ext_arr.descr:
+ */
+  __pyx_t_1 = __Pyx_TypeCheck(((PyObject *)__pyx_v_ext_arr), __pyx_ptype_11cython_code_8my_array_array); 
+  __pyx_t_2 = ((!(__pyx_t_1 != 0)) != 0);
+  if (unlikely(__pyx_t_2)) {
+
+    /* "cython_code/my_array.pyx":201
+ *         """
+ *         if not isinstance(ext_arr, array):
+ *             raise TypeError(f"Incorrect type of argument")             # <<<<<<<<<<<<<<
+ *         if self.descr != ext_arr.descr:
+ *             raise TypeError(f"Incorrect type of values")
+ */
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 201, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_Raise(__pyx_t_3, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __PYX_ERR(0, 201, __pyx_L1_error)
+
+    /* "cython_code/my_array.pyx":200
+ *         :param ext_arr: ,
+ *         """
+ *         if not isinstance(ext_arr, array):             # <<<<<<<<<<<<<<
+ *             raise TypeError(f"Incorrect type of argument")
+ *         if self.descr != ext_arr.descr:
+ */
+  }
+
+  /* "cython_code/my_array.pyx":202
+ *         if not isinstance(ext_arr, array):
+ *             raise TypeError(f"Incorrect type of argument")
+ *         if self.descr != ext_arr.descr:             # <<<<<<<<<<<<<<
+ *             raise TypeError(f"Incorrect type of values")
+ *         self.extend_by_array(ext_arr)
+ */
+  __pyx_t_2 = ((__pyx_v_self->descr != __pyx_v_ext_arr->descr) != 0);
+  if (unlikely(__pyx_t_2)) {
+
+    /* "cython_code/my_array.pyx":203
+ *             raise TypeError(f"Incorrect type of argument")
+ *         if self.descr != ext_arr.descr:
+ *             raise TypeError(f"Incorrect type of values")             # <<<<<<<<<<<<<<
+ *         self.extend_by_array(ext_arr)
+ *         cdef long i
+ */
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 203, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_Raise(__pyx_t_3, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __PYX_ERR(0, 203, __pyx_L1_error)
+
+    /* "cython_code/my_array.pyx":202
+ *         if not isinstance(ext_arr, array):
+ *             raise TypeError(f"Incorrect type of argument")
+ *         if self.descr != ext_arr.descr:             # <<<<<<<<<<<<<<
+ *             raise TypeError(f"Incorrect type of values")
+ *         self.extend_by_array(ext_arr)
+ */
+  }
+
+  /* "cython_code/my_array.pyx":204
+ *         if self.descr != ext_arr.descr:
+ *             raise TypeError(f"Incorrect type of values")
  *         self.extend_by_array(ext_arr)             # <<<<<<<<<<<<<<
  *         cdef long i
  *         for i in range(len(ext_arr)):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_extend_by_array); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_extend_by_array); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_5 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_5);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __Pyx_DECREF_SET(__pyx_t_4, function);
     }
   }
-  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, ((PyObject *)__pyx_v_ext_arr)) : __Pyx_PyObject_CallOneArg(__pyx_t_2, ((PyObject *)__pyx_v_ext_arr));
-  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_3 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, ((PyObject *)__pyx_v_ext_arr)) : __Pyx_PyObject_CallOneArg(__pyx_t_4, ((PyObject *)__pyx_v_ext_arr));
+  __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cython_code/my_array.pyx":142
+  /* "cython_code/my_array.pyx":206
  *         self.extend_by_array(ext_arr)
  *         cdef long i
  *         for i in range(len(ext_arr)):             # <<<<<<<<<<<<<<
  *             self.descr.setitem(self, self.length, ext_arr[i])
  *             self.length += 1
  */
-  __pyx_t_4 = PyObject_Length(((PyObject *)__pyx_v_ext_arr)); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 142, __pyx_L1_error)
-  __pyx_t_5 = __pyx_t_4;
-  for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
-    __pyx_v_i = __pyx_t_6;
+  __pyx_t_6 = PyObject_Length(((PyObject *)__pyx_v_ext_arr)); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_t_7 = __pyx_t_6;
+  for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
+    __pyx_v_i = __pyx_t_8;
 
-    /* "cython_code/my_array.pyx":143
+    /* "cython_code/my_array.pyx":207
  *         cdef long i
  *         for i in range(len(ext_arr)):
  *             self.descr.setitem(self, self.length, ext_arr[i])             # <<<<<<<<<<<<<<
  *             self.length += 1
  * 
  */
-    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_ext_arr), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    (void)(__pyx_v_self->descr->setitem(__pyx_v_self, __pyx_v_self->length, __pyx_t_1));
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_3 = __Pyx_GetItemInt(((PyObject *)__pyx_v_ext_arr), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    (void)(__pyx_v_self->descr->setitem(__pyx_v_self, __pyx_v_self->length, __pyx_t_3));
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "cython_code/my_array.pyx":144
+    /* "cython_code/my_array.pyx":208
  *         for i in range(len(ext_arr)):
  *             self.descr.setitem(self, self.length, ext_arr[i])
  *             self.length += 1             # <<<<<<<<<<<<<<
@@ -3358,21 +3479,21 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_12extend(struct __pyx_o
     __pyx_v_self->length = (__pyx_v_self->length + 1);
   }
 
-  /* "cython_code/my_array.pyx":139
+  /* "cython_code/my_array.pyx":195
  *         self.length += 1
  * 
- *     def extend(self, array ext_arr) -> None:             # <<<<<<<<<<<<<<
- *         self.extend_by_array(ext_arr)
- *         cdef long i
+ *     def extend(self, ext_arr: array) -> None:             # <<<<<<<<<<<<<<
+ *         """
+ * 
  */
 
   /* function exit code */
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
   __Pyx_AddTraceback("cython_code.my_array.array.extend", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -3381,16 +3502,17 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_12extend(struct __pyx_o
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":146
+/* "cython_code/my_array.pyx":210
  *             self.length += 1
  * 
  *     def insert(self, index: int, item: object) -> None:             # <<<<<<<<<<<<<<
- *         if index > self.length and index > 0:
- *             self.append(item)
+ *         """
+ *             (       )
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_15insert(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_14insert[] = "\n        \320\222\321\201\321\202\320\260\320\262\320\272\320\260 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\320\260 \320\277\320\276 \320\270\320\275\320\264\320\265\320\272\321\201\321\203 (\321\201 \320\277\320\276\321\201\320\273\320\265\320\264\321\203\321\216\321\211\320\270\320\274 \321\201\320\264\320\262\320\270\320\263\320\276\320\274 \320\262\320\277\321\200\320\260\320\262\320\276 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\320\276\320\262 \320\270\320\264\321\203\321\211\320\270\321\205 \320\277\320\276\321\201\320\273\320\265 \320\270\320\275\320\264\320\265\320\272\321\201\320\260)\n        :param index: \320\270\320\275\320\264\320\265\320\272\321\201 \320\275\320\260 \320\272\320\276\321\202\320\276\321\200\321\213\320\271 \320\262\321\201\321\202\320\260\320\262\320\273\321\217\320\265\320\274 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\n        :param item: \320\262\321\201\321\202\320\260\320\262\320\273\321\217\320\265\320\274\321\213\320\271 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\n        ";
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_15insert(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_index = 0;
   PyObject *__pyx_v_item = 0;
@@ -3423,11 +3545,11 @@ static PyObject *__pyx_pw_11cython_code_8my_array_5array_15insert(PyObject *__py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_item)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("insert", 1, 2, 2, 1); __PYX_ERR(0, 146, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("insert", 1, 2, 2, 1); __PYX_ERR(0, 210, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "insert") < 0)) __PYX_ERR(0, 146, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "insert") < 0)) __PYX_ERR(0, 210, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3440,7 +3562,7 @@ static PyObject *__pyx_pw_11cython_code_8my_array_5array_15insert(PyObject *__py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("insert", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 146, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("insert", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 210, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("cython_code.my_array.array.insert", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3472,41 +3594,41 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_14insert(struct __pyx_o
   __Pyx_RefNannySetupContext("insert", 0);
   __Pyx_INCREF(__pyx_v_index);
 
-  /* "cython_code/my_array.pyx":147
- * 
- *     def insert(self, index: int, item: object) -> None:
+  /* "cython_code/my_array.pyx":216
+ *         :param item:
+ *         """
  *         if index > self.length and index > 0:             # <<<<<<<<<<<<<<
  *             self.append(item)
  *             return
  */
-  __pyx_t_2 = __Pyx_PyInt_FromSize_t(__pyx_v_self->length); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_FromSize_t(__pyx_v_self->length); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyObject_RichCompare(__pyx_v_index, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_3 = PyObject_RichCompare(__pyx_v_index, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_4) {
   } else {
     __pyx_t_1 = __pyx_t_4;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_3 = PyObject_RichCompare(__pyx_v_index, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_3 = PyObject_RichCompare(__pyx_v_index, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_1 = __pyx_t_4;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "cython_code/my_array.pyx":148
- *     def insert(self, index: int, item: object) -> None:
+    /* "cython_code/my_array.pyx":217
+ *         """
  *         if index > self.length and index > 0:
  *             self.append(item)             # <<<<<<<<<<<<<<
  *             return
  *         if abs(index) > self.length and index < 0:
  */
-    __pyx_t_5 = __Pyx_PyObject_Append(((PyObject *)__pyx_v_self), __pyx_v_item); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 148, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Append(((PyObject *)__pyx_v_self), __pyx_v_item); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 217, __pyx_L1_error)
 
-    /* "cython_code/my_array.pyx":149
+    /* "cython_code/my_array.pyx":218
  *         if index > self.length and index > 0:
  *             self.append(item)
  *             return             # <<<<<<<<<<<<<<
@@ -3517,44 +3639,44 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_14insert(struct __pyx_o
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "cython_code/my_array.pyx":147
- * 
- *     def insert(self, index: int, item: object) -> None:
+    /* "cython_code/my_array.pyx":216
+ *         :param item:
+ *         """
  *         if index > self.length and index > 0:             # <<<<<<<<<<<<<<
  *             self.append(item)
  *             return
  */
   }
 
-  /* "cython_code/my_array.pyx":150
+  /* "cython_code/my_array.pyx":219
  *             self.append(item)
  *             return
  *         if abs(index) > self.length and index < 0:             # <<<<<<<<<<<<<<
  *             index = 0
  *         self.extend_array()
  */
-  __pyx_t_3 = __Pyx_PyNumber_Absolute(__pyx_v_index); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyNumber_Absolute(__pyx_v_index); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 219, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyInt_FromSize_t(__pyx_v_self->length); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_FromSize_t(__pyx_v_self->length); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 219, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_t_6 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 219, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 219, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   if (__pyx_t_4) {
   } else {
     __pyx_t_1 = __pyx_t_4;
     goto __pyx_L7_bool_binop_done;
   }
-  __pyx_t_6 = PyObject_RichCompare(__pyx_v_index, __pyx_int_0, Py_LT); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 150, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_t_6 = PyObject_RichCompare(__pyx_v_index, __pyx_int_0, Py_LT); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 219, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 219, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_t_1 = __pyx_t_4;
   __pyx_L7_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "cython_code/my_array.pyx":151
+    /* "cython_code/my_array.pyx":220
  *             return
  *         if abs(index) > self.length and index < 0:
  *             index = 0             # <<<<<<<<<<<<<<
@@ -3564,7 +3686,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_14insert(struct __pyx_o
     __Pyx_INCREF(__pyx_int_0);
     __Pyx_DECREF_SET(__pyx_v_index, __pyx_int_0);
 
-    /* "cython_code/my_array.pyx":150
+    /* "cython_code/my_array.pyx":219
  *             self.append(item)
  *             return
  *         if abs(index) > self.length and index < 0:             # <<<<<<<<<<<<<<
@@ -3573,14 +3695,14 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_14insert(struct __pyx_o
  */
   }
 
-  /* "cython_code/my_array.pyx":152
+  /* "cython_code/my_array.pyx":221
  *         if abs(index) > self.length and index < 0:
  *             index = 0
  *         self.extend_array()             # <<<<<<<<<<<<<<
  *         index = index_validate(index, self.length)
  *         self.length += 1
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_extend_array); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_extend_array); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 221, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3594,25 +3716,25 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_14insert(struct __pyx_o
   }
   __pyx_t_6 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 152, __pyx_L1_error)
+  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 221, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "cython_code/my_array.pyx":153
+  /* "cython_code/my_array.pyx":222
  *             index = 0
  *         self.extend_array()
  *         index = index_validate(index, self.length)             # <<<<<<<<<<<<<<
  *         self.length += 1
  *         for i in range(self.length - 1, index, -1):
  */
-  __pyx_t_7 = __Pyx_PyInt_As_long(__pyx_v_index); if (unlikely((__pyx_t_7 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 153, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyInt_From_long(__pyx_f_11cython_code_8my_array_index_validate(__pyx_t_7, __pyx_v_self->length)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 153, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_As_long(__pyx_v_index); if (unlikely((__pyx_t_7 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyInt_From_long(__pyx_f_11cython_code_8my_array_index_validate(__pyx_t_7, __pyx_v_self->length)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 222, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF_SET(__pyx_v_index, __pyx_t_6);
   __pyx_t_6 = 0;
 
-  /* "cython_code/my_array.pyx":154
+  /* "cython_code/my_array.pyx":223
  *         self.extend_array()
  *         index = index_validate(index, self.length)
  *         self.length += 1             # <<<<<<<<<<<<<<
@@ -3621,16 +3743,16 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_14insert(struct __pyx_o
  */
   __pyx_v_self->length = (__pyx_v_self->length + 1);
 
-  /* "cython_code/my_array.pyx":155
+  /* "cython_code/my_array.pyx":224
  *         index = index_validate(index, self.length)
  *         self.length += 1
  *         for i in range(self.length - 1, index, -1):             # <<<<<<<<<<<<<<
  *             self[i] = self[i - 1]
  *         self[index] = item
  */
-  __pyx_t_6 = __Pyx_PyInt_FromSize_t((__pyx_v_self->length - 1)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyInt_FromSize_t((__pyx_v_self->length - 1)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 224, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 224, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_6);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_6);
@@ -3641,16 +3763,16 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_14insert(struct __pyx_o
   __Pyx_GIVEREF(__pyx_int_neg_1);
   PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_int_neg_1);
   __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_2, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_2, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 224, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (likely(PyList_CheckExact(__pyx_t_6)) || PyTuple_CheckExact(__pyx_t_6)) {
     __pyx_t_2 = __pyx_t_6; __Pyx_INCREF(__pyx_t_2); __pyx_t_8 = 0;
     __pyx_t_9 = NULL;
   } else {
-    __pyx_t_8 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __pyx_t_8 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 224, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __pyx_t_9 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 224, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   for (;;) {
@@ -3658,17 +3780,17 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_14insert(struct __pyx_o
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_8 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_6 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_8); __Pyx_INCREF(__pyx_t_6); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(0, 155, __pyx_L1_error)
+        __pyx_t_6 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_8); __Pyx_INCREF(__pyx_t_6); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(0, 224, __pyx_L1_error)
         #else
-        __pyx_t_6 = PySequence_ITEM(__pyx_t_2, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 155, __pyx_L1_error)
+        __pyx_t_6 = PySequence_ITEM(__pyx_t_2, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 224, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         #endif
       } else {
         if (__pyx_t_8 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_6 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_8); __Pyx_INCREF(__pyx_t_6); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(0, 155, __pyx_L1_error)
+        __pyx_t_6 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_8); __Pyx_INCREF(__pyx_t_6); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(0, 224, __pyx_L1_error)
         #else
-        __pyx_t_6 = PySequence_ITEM(__pyx_t_2, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 155, __pyx_L1_error)
+        __pyx_t_6 = PySequence_ITEM(__pyx_t_2, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 224, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         #endif
       }
@@ -3678,7 +3800,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_14insert(struct __pyx_o
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 155, __pyx_L1_error)
+          else __PYX_ERR(0, 224, __pyx_L1_error)
         }
         break;
       }
@@ -3687,22 +3809,22 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_14insert(struct __pyx_o
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "cython_code/my_array.pyx":156
+    /* "cython_code/my_array.pyx":225
  *         self.length += 1
  *         for i in range(self.length - 1, index, -1):
  *             self[i] = self[i - 1]             # <<<<<<<<<<<<<<
  *         self[index] = item
  * 
  */
-    __pyx_t_6 = __Pyx_PyInt_SubtractObjC(__pyx_v_i, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 156, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_SubtractObjC(__pyx_v_i, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 225, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_3 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_self), __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 156, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_self), __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 225, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_self), __pyx_v_i, __pyx_t_3) < 0)) __PYX_ERR(0, 156, __pyx_L1_error)
+    if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_self), __pyx_v_i, __pyx_t_3) < 0)) __PYX_ERR(0, 225, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "cython_code/my_array.pyx":155
+    /* "cython_code/my_array.pyx":224
  *         index = index_validate(index, self.length)
  *         self.length += 1
  *         for i in range(self.length - 1, index, -1):             # <<<<<<<<<<<<<<
@@ -3712,21 +3834,21 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_14insert(struct __pyx_o
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cython_code/my_array.pyx":157
+  /* "cython_code/my_array.pyx":226
  *         for i in range(self.length - 1, index, -1):
  *             self[i] = self[i - 1]
  *         self[index] = item             # <<<<<<<<<<<<<<
  * 
  *     def remove(self, object item) -> None:
  */
-  if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_self), __pyx_v_index, __pyx_v_item) < 0)) __PYX_ERR(0, 157, __pyx_L1_error)
+  if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_self), __pyx_v_index, __pyx_v_item) < 0)) __PYX_ERR(0, 226, __pyx_L1_error)
 
-  /* "cython_code/my_array.pyx":146
+  /* "cython_code/my_array.pyx":210
  *             self.length += 1
  * 
  *     def insert(self, index: int, item: object) -> None:             # <<<<<<<<<<<<<<
- *         if index > self.length and index > 0:
- *             self.append(item)
+ *         """
+ *             (       )
  */
 
   /* function exit code */
@@ -3746,16 +3868,17 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_14insert(struct __pyx_o
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":159
+/* "cython_code/my_array.pyx":228
  *         self[index] = item
  * 
  *     def remove(self, object item) -> None:             # <<<<<<<<<<<<<<
- *         cdef int is_find = False
- *         cdef long i
+ *         """
+ * 
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_17remove(PyObject *__pyx_v_self, PyObject *__pyx_v_item); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_16remove[] = "\n        \320\243\320\264\320\260\320\273\320\265\320\275\320\270\320\265 \320\277\320\265\321\200\320\262\320\276\320\263\320\276 \320\262\321\205\320\276\320\266\320\264\320\265\320\275\320\270\321\217 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\321\217 \320\262 \320\274\320\260\321\201\321\201\320\270\320\262\n        :param item: \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\320\260\n        ";
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_17remove(PyObject *__pyx_v_self, PyObject *__pyx_v_item) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -3786,16 +3909,16 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_16remove(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("remove", 0);
 
-  /* "cython_code/my_array.pyx":160
- * 
- *     def remove(self, object item) -> None:
+  /* "cython_code/my_array.pyx":233
+ *         :param item:
+ *         """
  *         cdef int is_find = False             # <<<<<<<<<<<<<<
  *         cdef long i
  *         for i in range(self.length):
  */
   __pyx_v_is_find = 0;
 
-  /* "cython_code/my_array.pyx":162
+  /* "cython_code/my_array.pyx":235
  *         cdef int is_find = False
  *         cdef long i
  *         for i in range(self.length):             # <<<<<<<<<<<<<<
@@ -3807,22 +3930,22 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_16remove(struct __pyx_o
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "cython_code/my_array.pyx":163
+    /* "cython_code/my_array.pyx":236
  *         cdef long i
  *         for i in range(self.length):
  *             if self[i] == item:             # <<<<<<<<<<<<<<
  *                 is_find = True
  *             if is_find and i < self.length - 1:
  */
-    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_self), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_self), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 236, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = PyObject_RichCompare(__pyx_t_4, __pyx_v_item, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_5 = PyObject_RichCompare(__pyx_t_4, __pyx_v_item, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 236, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 236, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     if (__pyx_t_6) {
 
-      /* "cython_code/my_array.pyx":164
+      /* "cython_code/my_array.pyx":237
  *         for i in range(self.length):
  *             if self[i] == item:
  *                 is_find = True             # <<<<<<<<<<<<<<
@@ -3831,7 +3954,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_16remove(struct __pyx_o
  */
       __pyx_v_is_find = 1;
 
-      /* "cython_code/my_array.pyx":163
+      /* "cython_code/my_array.pyx":236
  *         cdef long i
  *         for i in range(self.length):
  *             if self[i] == item:             # <<<<<<<<<<<<<<
@@ -3840,7 +3963,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_16remove(struct __pyx_o
  */
     }
 
-    /* "cython_code/my_array.pyx":165
+    /* "cython_code/my_array.pyx":238
  *             if self[i] == item:
  *                 is_find = True
  *             if is_find and i < self.length - 1:             # <<<<<<<<<<<<<<
@@ -3858,7 +3981,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_16remove(struct __pyx_o
     __pyx_L7_bool_binop_done:;
     if (__pyx_t_6) {
 
-      /* "cython_code/my_array.pyx":166
+      /* "cython_code/my_array.pyx":239
  *                 is_find = True
  *             if is_find and i < self.length - 1:
  *                 self[i] = self[i + 1]             # <<<<<<<<<<<<<<
@@ -3866,12 +3989,12 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_16remove(struct __pyx_o
  *             raise ValueError(f"array.remove(item): item not in array")
  */
       __pyx_t_8 = (__pyx_v_i + 1);
-      __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_self), __pyx_t_8, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 166, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_self), __pyx_t_8, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 239, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_self), __pyx_v_i, __pyx_t_5, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 166, __pyx_L1_error)
+      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_self), __pyx_v_i, __pyx_t_5, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 239, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-      /* "cython_code/my_array.pyx":165
+      /* "cython_code/my_array.pyx":238
  *             if self[i] == item:
  *                 is_find = True
  *             if is_find and i < self.length - 1:             # <<<<<<<<<<<<<<
@@ -3881,7 +4004,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_16remove(struct __pyx_o
     }
   }
 
-  /* "cython_code/my_array.pyx":167
+  /* "cython_code/my_array.pyx":240
  *             if is_find and i < self.length - 1:
  *                 self[i] = self[i + 1]
  *         if not is_find:             # <<<<<<<<<<<<<<
@@ -3891,20 +4014,20 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_16remove(struct __pyx_o
   __pyx_t_6 = ((!(__pyx_v_is_find != 0)) != 0);
   if (unlikely(__pyx_t_6)) {
 
-    /* "cython_code/my_array.pyx":168
+    /* "cython_code/my_array.pyx":241
  *                 self[i] = self[i + 1]
  *         if not is_find:
  *             raise ValueError(f"array.remove(item): item not in array")             # <<<<<<<<<<<<<<
  *         self.length -= 1
  *         self.shorten_array()
  */
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 168, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_Raise(__pyx_t_5, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __PYX_ERR(0, 168, __pyx_L1_error)
+    __PYX_ERR(0, 241, __pyx_L1_error)
 
-    /* "cython_code/my_array.pyx":167
+    /* "cython_code/my_array.pyx":240
  *             if is_find and i < self.length - 1:
  *                 self[i] = self[i + 1]
  *         if not is_find:             # <<<<<<<<<<<<<<
@@ -3913,7 +4036,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_16remove(struct __pyx_o
  */
   }
 
-  /* "cython_code/my_array.pyx":169
+  /* "cython_code/my_array.pyx":242
  *         if not is_find:
  *             raise ValueError(f"array.remove(item): item not in array")
  *         self.length -= 1             # <<<<<<<<<<<<<<
@@ -3922,14 +4045,14 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_16remove(struct __pyx_o
  */
   __pyx_v_self->length = (__pyx_v_self->length - 1);
 
-  /* "cython_code/my_array.pyx":170
+  /* "cython_code/my_array.pyx":243
  *             raise ValueError(f"array.remove(item): item not in array")
  *         self.length -= 1
  *         self.shorten_array()             # <<<<<<<<<<<<<<
  * 
  *     def pop(self, index: int | None = None) -> object:
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_shorten_array); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 170, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_shorten_array); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_9 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -3943,17 +4066,17 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_16remove(struct __pyx_o
   }
   __pyx_t_5 = (__pyx_t_9) ? __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_9) : __Pyx_PyObject_CallNoArg(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 170, __pyx_L1_error)
+  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cython_code/my_array.pyx":159
+  /* "cython_code/my_array.pyx":228
  *         self[index] = item
  * 
  *     def remove(self, object item) -> None:             # <<<<<<<<<<<<<<
- *         cdef int is_find = False
- *         cdef long i
+ *         """
+ * 
  */
 
   /* function exit code */
@@ -3971,16 +4094,17 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_16remove(struct __pyx_o
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":172
+/* "cython_code/my_array.pyx":245
  *         self.shorten_array()
  * 
  *     def pop(self, index: int | None = None) -> object:             # <<<<<<<<<<<<<<
- *         if self.length == 0:
- *             raise IndexError(f"pop from empty list")
+ *         """
+ * 
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_19pop(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_18pop[] = "\n        \320\234\320\265\321\202\320\276\320\264 \321\203\320\264\320\260\320\273\320\265\320\275\320\270\321\217 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\320\260 \320\277\320\276 \320\270\320\275\320\264\320\265\320\272\321\201\321\203 \321\201 \320\277\320\276\321\201\320\273\320\265\320\264\321\203\321\216\321\211\320\270\320\274 \320\265\320\263\320\276 \320\262\320\276\320\267\320\262\321\200\320\260\321\211\320\265\320\275\320\270\320\265\320\274\n        array.pop() - \321\203\320\264\320\260\320\273\320\270\321\202 \320\277\320\276\321\201\320\273\320\265\320\264\320\275\320\270\320\271 \321\215\320\273\320\265\320\274\320\265\320\275\321\202 \320\274\320\260\321\201\321\201\320\270\320\262\320\260\n        :param index: \320\270\320\275\320\264\320\265\320\272\321\201 \321\203\320\264\320\260\320\273\321\217\320\265\320\274\320\276\320\263\320\276 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\320\260\n        :return: \321\203\320\264\320\260\320\273\321\217\320\265\320\274\321\213\320\271 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\n        ";
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_19pop(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_index = 0;
   int __pyx_lineno = 0;
@@ -4011,7 +4135,7 @@ static PyObject *__pyx_pw_11cython_code_8my_array_5array_19pop(PyObject *__pyx_v
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "pop") < 0)) __PYX_ERR(0, 172, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "pop") < 0)) __PYX_ERR(0, 245, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -4025,7 +4149,7 @@ static PyObject *__pyx_pw_11cython_code_8my_array_5array_19pop(PyObject *__pyx_v
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("pop", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 172, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("pop", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 245, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("cython_code.my_array.array.pop", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4058,9 +4182,9 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
   __Pyx_RefNannySetupContext("pop", 0);
   __Pyx_INCREF(__pyx_v_index);
 
-  /* "cython_code/my_array.pyx":173
- * 
- *     def pop(self, index: int | None = None) -> object:
+  /* "cython_code/my_array.pyx":252
+ *         :return:
+ *         """
  *         if self.length == 0:             # <<<<<<<<<<<<<<
  *             raise IndexError(f"pop from empty list")
  *         if index is None:
@@ -4068,29 +4192,29 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
   __pyx_t_1 = ((__pyx_v_self->length == 0) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "cython_code/my_array.pyx":174
- *     def pop(self, index: int | None = None) -> object:
+    /* "cython_code/my_array.pyx":253
+ *         """
  *         if self.length == 0:
  *             raise IndexError(f"pop from empty list")             # <<<<<<<<<<<<<<
  *         if index is None:
  *             pop_val = self[self.length - 1]
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 253, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 174, __pyx_L1_error)
+    __PYX_ERR(0, 253, __pyx_L1_error)
 
-    /* "cython_code/my_array.pyx":173
- * 
- *     def pop(self, index: int | None = None) -> object:
+    /* "cython_code/my_array.pyx":252
+ *         :return:
+ *         """
  *         if self.length == 0:             # <<<<<<<<<<<<<<
  *             raise IndexError(f"pop from empty list")
  *         if index is None:
  */
   }
 
-  /* "cython_code/my_array.pyx":175
+  /* "cython_code/my_array.pyx":254
  *         if self.length == 0:
  *             raise IndexError(f"pop from empty list")
  *         if index is None:             # <<<<<<<<<<<<<<
@@ -4101,7 +4225,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
   __pyx_t_3 = (__pyx_t_1 != 0);
   if (__pyx_t_3) {
 
-    /* "cython_code/my_array.pyx":176
+    /* "cython_code/my_array.pyx":255
  *             raise IndexError(f"pop from empty list")
  *         if index is None:
  *             pop_val = self[self.length - 1]             # <<<<<<<<<<<<<<
@@ -4109,12 +4233,12 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
  *             return pop_val
  */
     __pyx_t_4 = (__pyx_v_self->length - 1);
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_self), __pyx_t_4, size_t, 0, __Pyx_PyInt_FromSize_t, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 176, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_self), __pyx_t_4, size_t, 0, __Pyx_PyInt_FromSize_t, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_v_pop_val = __pyx_t_2;
     __pyx_t_2 = 0;
 
-    /* "cython_code/my_array.pyx":177
+    /* "cython_code/my_array.pyx":256
  *         if index is None:
  *             pop_val = self[self.length - 1]
  *             self.length -= 1             # <<<<<<<<<<<<<<
@@ -4123,7 +4247,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
  */
     __pyx_v_self->length = (__pyx_v_self->length - 1);
 
-    /* "cython_code/my_array.pyx":178
+    /* "cython_code/my_array.pyx":257
  *             pop_val = self[self.length - 1]
  *             self.length -= 1
  *             return pop_val             # <<<<<<<<<<<<<<
@@ -4135,7 +4259,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
     __pyx_r = __pyx_v_pop_val;
     goto __pyx_L0;
 
-    /* "cython_code/my_array.pyx":175
+    /* "cython_code/my_array.pyx":254
  *         if self.length == 0:
  *             raise IndexError(f"pop from empty list")
  *         if index is None:             # <<<<<<<<<<<<<<
@@ -4144,51 +4268,51 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
  */
   }
 
-  /* "cython_code/my_array.pyx":179
+  /* "cython_code/my_array.pyx":258
  *             self.length -= 1
  *             return pop_val
  *         if -index > self.length or index >= self.length:             # <<<<<<<<<<<<<<
  *             raise IndexError(f"pop index out of range")
  *         index = index_validate(index, self.length)
  */
-  __pyx_t_2 = PyNumber_Negative(__pyx_v_index); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Negative(__pyx_v_index); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyInt_FromSize_t(__pyx_v_self->length); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_FromSize_t(__pyx_v_self->length); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = PyObject_RichCompare(__pyx_t_2, __pyx_t_5, Py_GT); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_6 = PyObject_RichCompare(__pyx_t_2, __pyx_t_5, Py_GT); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   if (!__pyx_t_1) {
   } else {
     __pyx_t_3 = __pyx_t_1;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_6 = __Pyx_PyInt_FromSize_t(__pyx_v_self->length); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyInt_FromSize_t(__pyx_v_self->length); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_5 = PyObject_RichCompare(__pyx_v_index, __pyx_t_6, Py_GE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_5 = PyObject_RichCompare(__pyx_v_index, __pyx_t_6, Py_GE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_3 = __pyx_t_1;
   __pyx_L6_bool_binop_done:;
   if (unlikely(__pyx_t_3)) {
 
-    /* "cython_code/my_array.pyx":180
+    /* "cython_code/my_array.pyx":259
  *             return pop_val
  *         if -index > self.length or index >= self.length:
  *             raise IndexError(f"pop index out of range")             # <<<<<<<<<<<<<<
  *         index = index_validate(index, self.length)
  *         pop_val = self[index]
  */
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 180, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 259, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_Raise(__pyx_t_5, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __PYX_ERR(0, 180, __pyx_L1_error)
+    __PYX_ERR(0, 259, __pyx_L1_error)
 
-    /* "cython_code/my_array.pyx":179
+    /* "cython_code/my_array.pyx":258
  *             self.length -= 1
  *             return pop_val
  *         if -index > self.length or index >= self.length:             # <<<<<<<<<<<<<<
@@ -4197,41 +4321,41 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
  */
   }
 
-  /* "cython_code/my_array.pyx":181
+  /* "cython_code/my_array.pyx":260
  *         if -index > self.length or index >= self.length:
  *             raise IndexError(f"pop index out of range")
  *         index = index_validate(index, self.length)             # <<<<<<<<<<<<<<
  *         pop_val = self[index]
  *         for i in range(index, self.length - 1):
  */
-  __pyx_t_7 = __Pyx_PyInt_As_long(__pyx_v_index); if (unlikely((__pyx_t_7 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 181, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_PyInt_From_long(__pyx_f_11cython_code_8my_array_index_validate(__pyx_t_7, __pyx_v_self->length)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 181, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_As_long(__pyx_v_index); if (unlikely((__pyx_t_7 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_From_long(__pyx_f_11cython_code_8my_array_index_validate(__pyx_t_7, __pyx_v_self->length)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 260, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF_SET(__pyx_v_index, __pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "cython_code/my_array.pyx":182
+  /* "cython_code/my_array.pyx":261
  *             raise IndexError(f"pop index out of range")
  *         index = index_validate(index, self.length)
  *         pop_val = self[index]             # <<<<<<<<<<<<<<
  *         for i in range(index, self.length - 1):
  *             self[i] = self[i + 1]
  */
-  __pyx_t_5 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_self), __pyx_v_index); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_self), __pyx_v_index); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 261, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_v_pop_val = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "cython_code/my_array.pyx":183
+  /* "cython_code/my_array.pyx":262
  *         index = index_validate(index, self.length)
  *         pop_val = self[index]
  *         for i in range(index, self.length - 1):             # <<<<<<<<<<<<<<
  *             self[i] = self[i + 1]
  *         self.length -= 1
  */
-  __pyx_t_5 = __Pyx_PyInt_FromSize_t((__pyx_v_self->length - 1)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_FromSize_t((__pyx_v_self->length - 1)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 262, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 262, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_INCREF(__pyx_v_index);
   __Pyx_GIVEREF(__pyx_v_index);
@@ -4239,16 +4363,16 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
   __Pyx_GIVEREF(__pyx_t_5);
   PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_5);
   __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_6, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_6, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 262, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   if (likely(PyList_CheckExact(__pyx_t_5)) || PyTuple_CheckExact(__pyx_t_5)) {
     __pyx_t_6 = __pyx_t_5; __Pyx_INCREF(__pyx_t_6); __pyx_t_8 = 0;
     __pyx_t_9 = NULL;
   } else {
-    __pyx_t_8 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __pyx_t_8 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 262, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_9 = Py_TYPE(__pyx_t_6)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __pyx_t_9 = Py_TYPE(__pyx_t_6)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 262, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   for (;;) {
@@ -4256,17 +4380,17 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
       if (likely(PyList_CheckExact(__pyx_t_6))) {
         if (__pyx_t_8 >= PyList_GET_SIZE(__pyx_t_6)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_5 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_8); __Pyx_INCREF(__pyx_t_5); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(0, 183, __pyx_L1_error)
+        __pyx_t_5 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_8); __Pyx_INCREF(__pyx_t_5); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(0, 262, __pyx_L1_error)
         #else
-        __pyx_t_5 = PySequence_ITEM(__pyx_t_6, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 183, __pyx_L1_error)
+        __pyx_t_5 = PySequence_ITEM(__pyx_t_6, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 262, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         #endif
       } else {
         if (__pyx_t_8 >= PyTuple_GET_SIZE(__pyx_t_6)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_8); __Pyx_INCREF(__pyx_t_5); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(0, 183, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_8); __Pyx_INCREF(__pyx_t_5); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(0, 262, __pyx_L1_error)
         #else
-        __pyx_t_5 = PySequence_ITEM(__pyx_t_6, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 183, __pyx_L1_error)
+        __pyx_t_5 = PySequence_ITEM(__pyx_t_6, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 262, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         #endif
       }
@@ -4276,7 +4400,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 183, __pyx_L1_error)
+          else __PYX_ERR(0, 262, __pyx_L1_error)
         }
         break;
       }
@@ -4285,22 +4409,22 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "cython_code/my_array.pyx":184
+    /* "cython_code/my_array.pyx":263
  *         pop_val = self[index]
  *         for i in range(index, self.length - 1):
  *             self[i] = self[i + 1]             # <<<<<<<<<<<<<<
  *         self.length -= 1
  *         self.shorten_array()
  */
-    __pyx_t_5 = __Pyx_PyInt_AddObjC(__pyx_v_i, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 184, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyInt_AddObjC(__pyx_v_i, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 263, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_self), __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 184, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_self), __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 263, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_self), __pyx_v_i, __pyx_t_2) < 0)) __PYX_ERR(0, 184, __pyx_L1_error)
+    if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_self), __pyx_v_i, __pyx_t_2) < 0)) __PYX_ERR(0, 263, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "cython_code/my_array.pyx":183
+    /* "cython_code/my_array.pyx":262
  *         index = index_validate(index, self.length)
  *         pop_val = self[index]
  *         for i in range(index, self.length - 1):             # <<<<<<<<<<<<<<
@@ -4310,7 +4434,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
   }
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "cython_code/my_array.pyx":185
+  /* "cython_code/my_array.pyx":264
  *         for i in range(index, self.length - 1):
  *             self[i] = self[i + 1]
  *         self.length -= 1             # <<<<<<<<<<<<<<
@@ -4319,14 +4443,14 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
  */
   __pyx_v_self->length = (__pyx_v_self->length - 1);
 
-  /* "cython_code/my_array.pyx":186
+  /* "cython_code/my_array.pyx":265
  *             self[i] = self[i + 1]
  *         self.length -= 1
  *         self.shorten_array()             # <<<<<<<<<<<<<<
  *         return pop_val
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_shorten_array); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_shorten_array); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -4340,12 +4464,12 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
   }
   __pyx_t_6 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 186, __pyx_L1_error)
+  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "cython_code/my_array.pyx":187
+  /* "cython_code/my_array.pyx":266
  *         self.length -= 1
  *         self.shorten_array()
  *         return pop_val             # <<<<<<<<<<<<<<
@@ -4357,12 +4481,12 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
   __pyx_r = __pyx_v_pop_val;
   goto __pyx_L0;
 
-  /* "cython_code/my_array.pyx":172
+  /* "cython_code/my_array.pyx":245
  *         self.shorten_array()
  * 
  *     def pop(self, index: int | None = None) -> object:             # <<<<<<<<<<<<<<
- *         if self.length == 0:
- *             raise IndexError(f"pop from empty list")
+ *         """
+ * 
  */
 
   /* function exit code */
@@ -4381,12 +4505,12 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_18pop(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":189
+/* "cython_code/my_array.pyx":268
  *         return pop_val
  * 
  *     def __dealloc__(self) -> None:             # <<<<<<<<<<<<<<
- *         PyMem_Free(self.data)
- * 
+ *         """
+ *          ,
  */
 
 /* Python wrapper */
@@ -4404,37 +4528,41 @@ static void __pyx_pf_11cython_code_8my_array_5array_20__dealloc__(struct __pyx_o
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "cython_code/my_array.pyx":190
- * 
- *     def __dealloc__(self) -> None:
+  /* "cython_code/my_array.pyx":272
+ *          ,
+ *         """
  *         PyMem_Free(self.data)             # <<<<<<<<<<<<<<
  * 
  *     def __getitem__(self, index: int) -> object:
  */
   PyMem_Free(__pyx_v_self->data);
 
-  /* "cython_code/my_array.pyx":189
+  /* "cython_code/my_array.pyx":268
  *         return pop_val
  * 
  *     def __dealloc__(self) -> None:             # <<<<<<<<<<<<<<
- *         PyMem_Free(self.data)
- * 
+ *         """
+ *          ,
  */
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-/* "cython_code/my_array.pyx":192
+/* "cython_code/my_array.pyx":274
  *         PyMem_Free(self.data)
  * 
  *     def __getitem__(self, index: int) -> object:             # <<<<<<<<<<<<<<
- *         if 0 <= index < self.length:
- *             return self.descr.getitem(self, index)
+ *         """
+ * 
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_23__getitem__(PyObject *__pyx_v_self, PyObject *__pyx_v_index); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_22__getitem__[] = "\n        \320\237\320\276\320\273\321\203\321\207\320\265\320\275\320\270\320\265 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\321\217 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\320\260 \320\274\320\260\321\201\321\201\320\270\320\262\320\260 \320\277\320\276 \320\270\320\275\320\264\320\265\320\272\321\201\321\203\n        :param index: \320\270\320\275\320\264\320\265\320\272\321\201 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\320\260\n        :return: \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265, \320\275\320\260\321\205\320\276\320\264\321\217\321\211\320\265\320\265\321\201\321\217 \320\277\320\276 \320\270\320\275\320\264\320\265\320\272\321\201\321\203\n        ";
+#if CYTHON_UPDATE_DESCRIPTOR_DOC
+struct wrapperbase __pyx_wrapperbase_11cython_code_8my_array_5array_22__getitem__;
+#endif
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_23__getitem__(PyObject *__pyx_v_self, PyObject *__pyx_v_index) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -4458,68 +4586,68 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_22__getitem__(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__getitem__", 0);
 
-  /* "cython_code/my_array.pyx":193
- * 
- *     def __getitem__(self, index: int) -> object:
+  /* "cython_code/my_array.pyx":280
+ *         :return: ,
+ *         """
  *         if 0 <= index < self.length:             # <<<<<<<<<<<<<<
  *             return self.descr.getitem(self, index)
  *         raise IndexError("list index out of range")
  */
-  __pyx_t_1 = PyObject_RichCompare(__pyx_int_0, __pyx_v_index, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(__pyx_int_0, __pyx_v_index, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 280, __pyx_L1_error)
   if (__Pyx_PyObject_IsTrue(__pyx_t_1)) {
     __Pyx_DECREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyInt_FromSize_t(__pyx_v_self->length); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 193, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_FromSize_t(__pyx_v_self->length); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 280, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_index, __pyx_t_2, Py_LT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_index, __pyx_t_2, Py_LT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 280, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_3) {
 
-    /* "cython_code/my_array.pyx":194
- *     def __getitem__(self, index: int) -> object:
+    /* "cython_code/my_array.pyx":281
+ *         """
  *         if 0 <= index < self.length:
  *             return self.descr.getitem(self, index)             # <<<<<<<<<<<<<<
  *         raise IndexError("list index out of range")
  * 
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_4 = __Pyx_PyInt_As_size_t(__pyx_v_index); if (unlikely((__pyx_t_4 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 194, __pyx_L1_error)
-    __pyx_t_1 = __pyx_v_self->descr->getitem(__pyx_v_self, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyInt_As_size_t(__pyx_v_index); if (unlikely((__pyx_t_4 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 281, __pyx_L1_error)
+    __pyx_t_1 = __pyx_v_self->descr->getitem(__pyx_v_self, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 281, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "cython_code/my_array.pyx":193
- * 
- *     def __getitem__(self, index: int) -> object:
+    /* "cython_code/my_array.pyx":280
+ *         :return: ,
+ *         """
  *         if 0 <= index < self.length:             # <<<<<<<<<<<<<<
  *             return self.descr.getitem(self, index)
  *         raise IndexError("list index out of range")
  */
   }
 
-  /* "cython_code/my_array.pyx":195
+  /* "cython_code/my_array.pyx":282
  *         if 0 <= index < self.length:
  *             return self.descr.getitem(self, index)
  *         raise IndexError("list index out of range")             # <<<<<<<<<<<<<<
  * 
  *     def __setitem__(self, index: int, value: object) -> None:
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 282, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(0, 195, __pyx_L1_error)
+  __PYX_ERR(0, 282, __pyx_L1_error)
 
-  /* "cython_code/my_array.pyx":192
+  /* "cython_code/my_array.pyx":274
  *         PyMem_Free(self.data)
  * 
  *     def __getitem__(self, index: int) -> object:             # <<<<<<<<<<<<<<
- *         if 0 <= index < self.length:
- *             return self.descr.getitem(self, index)
+ *         """
+ * 
  */
 
   /* function exit code */
@@ -4534,16 +4662,20 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_22__getitem__(struct __
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":197
+/* "cython_code/my_array.pyx":284
  *         raise IndexError("list index out of range")
  * 
  *     def __setitem__(self, index: int, value: object) -> None:             # <<<<<<<<<<<<<<
- *         if 0 <= index < self.length:
- *             self.descr.setitem(self, index, value)
+ *         """
+ * 
  */
 
 /* Python wrapper */
 static int __pyx_pw_11cython_code_8my_array_5array_25__setitem__(PyObject *__pyx_v_self, PyObject *__pyx_v_index, PyObject *__pyx_v_value); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_24__setitem__[] = "\n        \320\243\321\201\321\202\320\260\320\275\320\276\320\262\320\272\320\260 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\321\217 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\320\260 \320\274\320\260\321\201\321\201\320\270\320\262\320\260 \320\277\320\276 \320\270\320\275\320\264\320\265\320\272\321\201\321\203\n        :param index: \320\270\320\275\320\264\320\265\320\272\321\201 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\320\260\n        :param value: \320\275\320\276\320\262\320\276\320\265 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\320\260\n        ";
+#if CYTHON_UPDATE_DESCRIPTOR_DOC
+struct wrapperbase __pyx_wrapperbase_11cython_code_8my_array_5array_24__setitem__;
+#endif
 static int __pyx_pw_11cython_code_8my_array_5array_25__setitem__(PyObject *__pyx_v_self, PyObject *__pyx_v_index, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
@@ -4567,38 +4699,38 @@ static int __pyx_pf_11cython_code_8my_array_5array_24__setitem__(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__setitem__", 0);
 
-  /* "cython_code/my_array.pyx":198
- * 
- *     def __setitem__(self, index: int, value: object) -> None:
+  /* "cython_code/my_array.pyx":290
+ *         :param value:
+ *         """
  *         if 0 <= index < self.length:             # <<<<<<<<<<<<<<
  *             self.descr.setitem(self, index, value)
  *         else:
  */
-  __pyx_t_1 = PyObject_RichCompare(__pyx_int_0, __pyx_v_index, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(__pyx_int_0, __pyx_v_index, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 290, __pyx_L1_error)
   if (__Pyx_PyObject_IsTrue(__pyx_t_1)) {
     __Pyx_DECREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyInt_FromSize_t(__pyx_v_self->length); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 198, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_FromSize_t(__pyx_v_self->length); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 290, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_index, __pyx_t_2, Py_LT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_index, __pyx_t_2, Py_LT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 290, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 290, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (likely(__pyx_t_3)) {
 
-    /* "cython_code/my_array.pyx":199
- *     def __setitem__(self, index: int, value: object) -> None:
+    /* "cython_code/my_array.pyx":291
+ *         """
  *         if 0 <= index < self.length:
  *             self.descr.setitem(self, index, value)             # <<<<<<<<<<<<<<
  *         else:
  *             raise IndexError("list index out of range")
  */
-    __pyx_t_4 = __Pyx_PyInt_As_size_t(__pyx_v_index); if (unlikely((__pyx_t_4 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 199, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyInt_As_size_t(__pyx_v_index); if (unlikely((__pyx_t_4 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 291, __pyx_L1_error)
     (void)(__pyx_v_self->descr->setitem(__pyx_v_self, __pyx_t_4, __pyx_v_value));
 
-    /* "cython_code/my_array.pyx":198
- * 
- *     def __setitem__(self, index: int, value: object) -> None:
+    /* "cython_code/my_array.pyx":290
+ *         :param value:
+ *         """
  *         if 0 <= index < self.length:             # <<<<<<<<<<<<<<
  *             self.descr.setitem(self, index, value)
  *         else:
@@ -4606,7 +4738,7 @@ static int __pyx_pf_11cython_code_8my_array_5array_24__setitem__(struct __pyx_ob
     goto __pyx_L3;
   }
 
-  /* "cython_code/my_array.pyx":201
+  /* "cython_code/my_array.pyx":293
  *             self.descr.setitem(self, index, value)
  *         else:
  *             raise IndexError("list index out of range")             # <<<<<<<<<<<<<<
@@ -4614,20 +4746,20 @@ static int __pyx_pf_11cython_code_8my_array_5array_24__setitem__(struct __pyx_ob
  *     def __len__(self) -> size_t:
  */
   /*else*/ {
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 201, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 293, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 201, __pyx_L1_error)
+    __PYX_ERR(0, 293, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "cython_code/my_array.pyx":197
+  /* "cython_code/my_array.pyx":284
  *         raise IndexError("list index out of range")
  * 
  *     def __setitem__(self, index: int, value: object) -> None:             # <<<<<<<<<<<<<<
- *         if 0 <= index < self.length:
- *             self.descr.setitem(self, index, value)
+ *         """
+ * 
  */
 
   /* function exit code */
@@ -4643,16 +4775,20 @@ static int __pyx_pf_11cython_code_8my_array_5array_24__setitem__(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":203
+/* "cython_code/my_array.pyx":295
  *             raise IndexError("list index out of range")
  * 
  *     def __len__(self) -> size_t:             # <<<<<<<<<<<<<<
- *         return self.length
- * 
+ *         """
+ *         :return: -
  */
 
 /* Python wrapper */
 static Py_ssize_t __pyx_pw_11cython_code_8my_array_5array_27__len__(PyObject *__pyx_v_self); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_26__len__[] = "\n        :return: \320\232\320\276\320\273-\320\262\320\276 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\320\276\320\262 \320\274\320\260\321\201\321\201\320\270\320\262\320\260\n        ";
+#if CYTHON_UPDATE_DESCRIPTOR_DOC
+struct wrapperbase __pyx_wrapperbase_11cython_code_8my_array_5array_26__len__;
+#endif
 static Py_ssize_t __pyx_pw_11cython_code_8my_array_5array_27__len__(PyObject *__pyx_v_self) {
   Py_ssize_t __pyx_r;
   __Pyx_RefNannyDeclarations
@@ -4669,9 +4805,9 @@ static Py_ssize_t __pyx_pf_11cython_code_8my_array_5array_26__len__(struct __pyx
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__len__", 0);
 
-  /* "cython_code/my_array.pyx":204
- * 
- *     def __len__(self) -> size_t:
+  /* "cython_code/my_array.pyx":299
+ *         :return: -
+ *         """
  *         return self.length             # <<<<<<<<<<<<<<
  * 
  *     def __eq__(self, array_to_eq : list | eq_array) -> bool:
@@ -4679,12 +4815,12 @@ static Py_ssize_t __pyx_pf_11cython_code_8my_array_5array_26__len__(struct __pyx
   __pyx_r = __pyx_v_self->length;
   goto __pyx_L0;
 
-  /* "cython_code/my_array.pyx":203
+  /* "cython_code/my_array.pyx":295
  *             raise IndexError("list index out of range")
  * 
  *     def __len__(self) -> size_t:             # <<<<<<<<<<<<<<
- *         return self.length
- * 
+ *         """
+ *         :return: -
  */
 
   /* function exit code */
@@ -4693,16 +4829,20 @@ static Py_ssize_t __pyx_pf_11cython_code_8my_array_5array_26__len__(struct __pyx
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":206
+/* "cython_code/my_array.pyx":301
  *         return self.length
  * 
  *     def __eq__(self, array_to_eq : list | eq_array) -> bool:             # <<<<<<<<<<<<<<
- *         if not isinstance(array_to_eq, (list, eq_array.array)):
- *             return False
+ *         """
+ *              Iterable
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_29__eq__(PyObject *__pyx_v_self, PyObject *__pyx_v_array_to_eq); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_28__eq__[] = "\n        \320\234\320\265\321\202\320\276\320\264 \321\201\321\200\320\260\320\262\320\275\320\265\320\275\320\270\321\217 \320\274\320\260\321\201\321\201\320\270\320\262\320\260 \321\201 \320\264\321\200\321\203\320\263\320\270\320\274 Iterable \320\276\320\261\321\212\320\265\320\272\321\202\320\276\320\274\n        :param array_to_eq: \320\236\320\261\321\212\320\265\320\272\321\202 \321\201 \320\272\320\276\321\202\320\276\321\200\321\213\320\274 \321\201\321\200\320\260\320\262\320\275\320\270\320\262\320\260\320\265\320\274\n        :return: \320\261\321\203\320\273\320\265\320\262\321\213\320\271 \321\200\320\265\320\267\321\203\320\273\321\214\321\202\320\260\321\202 \320\277\321\200\320\276\320\262\320\265\321\200\320\272\320\270 \320\275\320\260 \321\200\320\260\320\262\320\265\320\275\321\201\321\202\320\262\320\276\n        ";
+#if CYTHON_UPDATE_DESCRIPTOR_DOC
+struct wrapperbase __pyx_wrapperbase_11cython_code_8my_array_5array_28__eq__;
+#endif
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_29__eq__(PyObject *__pyx_v_self, PyObject *__pyx_v_array_to_eq) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -4734,16 +4874,16 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_28__eq__(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__eq__", 0);
 
-  /* "cython_code/my_array.pyx":207
- * 
- *     def __eq__(self, array_to_eq : list | eq_array) -> bool:
+  /* "cython_code/my_array.pyx":307
+ *         :return:
+ *         """
  *         if not isinstance(array_to_eq, (list, eq_array.array)):             # <<<<<<<<<<<<<<
  *             return False
  *         if len(self) != len(array_to_eq):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_eq_array); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_eq_array); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 307, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_array); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_array); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 307, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_4 = PyList_Check(__pyx_v_array_to_eq); 
@@ -4761,8 +4901,8 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_28__eq__(struct __pyx_o
   __pyx_t_4 = ((!(__pyx_t_3 != 0)) != 0);
   if (__pyx_t_4) {
 
-    /* "cython_code/my_array.pyx":208
- *     def __eq__(self, array_to_eq : list | eq_array) -> bool:
+    /* "cython_code/my_array.pyx":308
+ *         """
  *         if not isinstance(array_to_eq, (list, eq_array.array)):
  *             return False             # <<<<<<<<<<<<<<
  *         if len(self) != len(array_to_eq):
@@ -4773,28 +4913,28 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_28__eq__(struct __pyx_o
     __pyx_r = Py_False;
     goto __pyx_L0;
 
-    /* "cython_code/my_array.pyx":207
- * 
- *     def __eq__(self, array_to_eq : list | eq_array) -> bool:
+    /* "cython_code/my_array.pyx":307
+ *         :return:
+ *         """
  *         if not isinstance(array_to_eq, (list, eq_array.array)):             # <<<<<<<<<<<<<<
  *             return False
  *         if len(self) != len(array_to_eq):
  */
   }
 
-  /* "cython_code/my_array.pyx":209
+  /* "cython_code/my_array.pyx":309
  *         if not isinstance(array_to_eq, (list, eq_array.array)):
  *             return False
  *         if len(self) != len(array_to_eq):             # <<<<<<<<<<<<<<
  *             return False
  *         cdef int el;
  */
-  __pyx_t_6 = PyObject_Length(((PyObject *)__pyx_v_self)); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 209, __pyx_L1_error)
-  __pyx_t_7 = PyObject_Length(__pyx_v_array_to_eq); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 209, __pyx_L1_error)
+  __pyx_t_6 = PyObject_Length(((PyObject *)__pyx_v_self)); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 309, __pyx_L1_error)
+  __pyx_t_7 = PyObject_Length(__pyx_v_array_to_eq); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 309, __pyx_L1_error)
   __pyx_t_4 = ((__pyx_t_6 != __pyx_t_7) != 0);
   if (__pyx_t_4) {
 
-    /* "cython_code/my_array.pyx":210
+    /* "cython_code/my_array.pyx":310
  *             return False
  *         if len(self) != len(array_to_eq):
  *             return False             # <<<<<<<<<<<<<<
@@ -4806,7 +4946,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_28__eq__(struct __pyx_o
     __pyx_r = Py_False;
     goto __pyx_L0;
 
-    /* "cython_code/my_array.pyx":209
+    /* "cython_code/my_array.pyx":309
  *         if not isinstance(array_to_eq, (list, eq_array.array)):
  *             return False
  *         if len(self) != len(array_to_eq):             # <<<<<<<<<<<<<<
@@ -4815,7 +4955,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_28__eq__(struct __pyx_o
  */
   }
 
-  /* "cython_code/my_array.pyx":212
+  /* "cython_code/my_array.pyx":312
  *             return False
  *         cdef int el;
  *         for el in range(self.length):             # <<<<<<<<<<<<<<
@@ -4827,25 +4967,25 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_28__eq__(struct __pyx_o
   for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
     __pyx_v_el = __pyx_t_10;
 
-    /* "cython_code/my_array.pyx":213
+    /* "cython_code/my_array.pyx":313
  *         cdef int el;
  *         for el in range(self.length):
  *             if self[el] != array_to_eq[el]:             # <<<<<<<<<<<<<<
  *                 return False
  *         return True
  */
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_self), __pyx_v_el, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 213, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_self), __pyx_v_el, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 313, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_array_to_eq, __pyx_v_el, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 213, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_array_to_eq, __pyx_v_el, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 313, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_11 = PyObject_RichCompare(__pyx_t_2, __pyx_t_1, Py_NE); __Pyx_XGOTREF(__pyx_t_11); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 213, __pyx_L1_error)
+    __pyx_t_11 = PyObject_RichCompare(__pyx_t_2, __pyx_t_1, Py_NE); __Pyx_XGOTREF(__pyx_t_11); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 313, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 213, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 313, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     if (__pyx_t_4) {
 
-      /* "cython_code/my_array.pyx":214
+      /* "cython_code/my_array.pyx":314
  *         for el in range(self.length):
  *             if self[el] != array_to_eq[el]:
  *                 return False             # <<<<<<<<<<<<<<
@@ -4857,7 +4997,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_28__eq__(struct __pyx_o
       __pyx_r = Py_False;
       goto __pyx_L0;
 
-      /* "cython_code/my_array.pyx":213
+      /* "cython_code/my_array.pyx":313
  *         cdef int el;
  *         for el in range(self.length):
  *             if self[el] != array_to_eq[el]:             # <<<<<<<<<<<<<<
@@ -4867,7 +5007,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_28__eq__(struct __pyx_o
     }
   }
 
-  /* "cython_code/my_array.pyx":215
+  /* "cython_code/my_array.pyx":315
  *             if self[el] != array_to_eq[el]:
  *                 return False
  *         return True             # <<<<<<<<<<<<<<
@@ -4879,12 +5019,12 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_28__eq__(struct __pyx_o
   __pyx_r = Py_True;
   goto __pyx_L0;
 
-  /* "cython_code/my_array.pyx":206
+  /* "cython_code/my_array.pyx":301
  *         return self.length
  * 
  *     def __eq__(self, array_to_eq : list | eq_array) -> bool:             # <<<<<<<<<<<<<<
- *         if not isinstance(array_to_eq, (list, eq_array.array)):
- *             return False
+ *         """
+ *              Iterable
  */
 
   /* function exit code */
@@ -4900,16 +5040,20 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_28__eq__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":217
+/* "cython_code/my_array.pyx":317
  *         return True
  * 
  *     def __str__(self) -> str:             # <<<<<<<<<<<<<<
+ *         """
  * 
- *         return f"[{', '.join(str(i) for i in self)}]"
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_31__str__(PyObject *__pyx_v_self); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_30__str__[] = "\n        \320\222\320\276\320\267\320\262\321\200\320\260\321\211\320\260\320\265\321\202 \321\202\320\265\320\272\321\201\321\202\320\276\320\262\320\276\320\265 \320\277\321\200\320\265\320\264\321\201\321\202\320\260\320\262\320\273\320\265\320\275\320\270\320\265 \320\274\320\260\321\201\321\201\320\270\320\262\320\260\n        :return: \320\241\321\202\321\200\320\276\320\272\320\260 \320\262 \320\262\320\270\320\264\320\265 [x1, x2, x3], \321\201\320\276\320\264\320\265\321\200\320\266\320\260\321\211\320\260\321\217 \320\262\321\201\320\265 \321\215\320\273-\321\202\321\213 \320\274\320\260\321\201\321\201\320\270\320\262\320\260\n        ";
+#if CYTHON_UPDATE_DESCRIPTOR_DOC
+struct wrapperbase __pyx_wrapperbase_11cython_code_8my_array_5array_30__str__;
+#endif
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_31__str__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -4922,9 +5066,9 @@ static PyObject *__pyx_pw_11cython_code_8my_array_5array_31__str__(PyObject *__p
 }
 static PyObject *__pyx_gb_11cython_code_8my_array_5array_7__str___2generator(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "cython_code/my_array.pyx":219
- *     def __str__(self) -> str:
- * 
+/* "cython_code/my_array.pyx":322
+ *         :return:    [x1, x2, x3],   -
+ *         """
  *         return f"[{', '.join(str(i) for i in self)}]"             # <<<<<<<<<<<<<<
  * 
  *     def __repr__(self) -> str:
@@ -4942,7 +5086,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_7__str___genexpr(PyObje
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct_1_genexpr *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 219, __pyx_L1_error)
+    __PYX_ERR(0, 322, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -4950,7 +5094,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_7__str___genexpr(PyObje
   __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_outer_scope));
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_outer_scope);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_11cython_code_8my_array_5array_7__str___2generator, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_str___locals_genexpr, __pyx_n_s_cython_code_my_array); if (unlikely(!gen)) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_11cython_code_8my_array_5array_7__str___2generator, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_str___locals_genexpr, __pyx_n_s_cython_code_my_array); if (unlikely(!gen)) __PYX_ERR(0, 322, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -4981,39 +5125,38 @@ static PyObject *__pyx_gb_11cython_code_8my_array_5array_7__str___2generator(__p
   __Pyx_RefNannySetupContext("genexpr", 0);
   switch (__pyx_generator->resume_label) {
     case 0: goto __pyx_L3_first_run;
+    case 1: goto __pyx_L6_resume_from_yield;
     default: /* CPython raises the right error here */
     __Pyx_RefNannyFinishContext();
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 219, __pyx_L1_error)
-  __pyx_r = PyList_New(0); if (unlikely(!__pyx_r)) __PYX_ERR(0, 219, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_r);
-  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 219, __pyx_L1_error) }
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 322, __pyx_L1_error)
+  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 322, __pyx_L1_error) }
   if (likely(PyList_CheckExact(((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self))) || PyTuple_CheckExact(((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self))) {
     __pyx_t_1 = ((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self); __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
     __pyx_t_3 = NULL;
   } else {
-    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 322, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 322, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_3)) {
       if (likely(PyList_CheckExact(__pyx_t_1))) {
         if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 219, __pyx_L1_error)
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 322, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 219, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 322, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       } else {
         if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 219, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 322, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 219, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 322, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       }
@@ -5023,7 +5166,7 @@ static PyObject *__pyx_gb_11cython_code_8my_array_5array_7__str___2generator(__p
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 219, __pyx_L1_error)
+          else __PYX_ERR(0, 322, __pyx_L1_error)
         }
         break;
       }
@@ -5033,23 +5176,40 @@ static PyObject *__pyx_gb_11cython_code_8my_array_5array_7__str___2generator(__p
     __Pyx_XDECREF_SET(__pyx_cur_scope->__pyx_v_i, __pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_cur_scope->__pyx_v_i); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_cur_scope->__pyx_v_i); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 322, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (unlikely(__Pyx_ListComp_Append(__pyx_r, (PyObject*)__pyx_t_4))) __PYX_ERR(0, 219, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_r = __pyx_t_4;
+    __pyx_t_4 = 0;
+    __Pyx_XGIVEREF(__pyx_t_1);
+    __pyx_cur_scope->__pyx_t_0 = __pyx_t_1;
+    __pyx_cur_scope->__pyx_t_1 = __pyx_t_2;
+    __pyx_cur_scope->__pyx_t_2 = __pyx_t_3;
+    __Pyx_XGIVEREF(__pyx_r);
+    __Pyx_RefNannyFinishContext();
+    __Pyx_Coroutine_ResetAndClearException(__pyx_generator);
+    /* return from generator, yielding value */
+    __pyx_generator->resume_label = 1;
+    return __pyx_r;
+    __pyx_L6_resume_from_yield:;
+    __pyx_t_1 = __pyx_cur_scope->__pyx_t_0;
+    __pyx_cur_scope->__pyx_t_0 = 0;
+    __Pyx_XGOTREF(__pyx_t_1);
+    __pyx_t_2 = __pyx_cur_scope->__pyx_t_1;
+    __pyx_t_3 = __pyx_cur_scope->__pyx_t_2;
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 322, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
   /* function exit code */
+  PyErr_SetNone(PyExc_StopIteration);
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_r); __pyx_r = 0;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_AddTraceback("genexpr", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_XDECREF(__pyx_r); __pyx_r = 0;
   #if !CYTHON_USE_EXC_INFO_STACK
   __Pyx_Coroutine_ResetAndClearException(__pyx_generator);
   #endif
@@ -5059,12 +5219,12 @@ static PyObject *__pyx_gb_11cython_code_8my_array_5array_7__str___2generator(__p
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":217
+/* "cython_code/my_array.pyx":317
  *         return True
  * 
  *     def __str__(self) -> str:             # <<<<<<<<<<<<<<
+ *         """
  * 
- *         return f"[{', '.join(str(i) for i in self)}]"
  */
 
 static PyObject *__pyx_pf_11cython_code_8my_array_5array_30__str__(struct __pyx_obj_11cython_code_8my_array_array *__pyx_v_self) {
@@ -5085,7 +5245,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_30__str__(struct __pyx_
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct____str__ *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 217, __pyx_L1_error)
+    __PYX_ERR(0, 317, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -5093,28 +5253,28 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_30__str__(struct __pyx_
   __Pyx_INCREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
 
-  /* "cython_code/my_array.pyx":219
- *     def __str__(self) -> str:
- * 
+  /* "cython_code/my_array.pyx":322
+ *         :return:    [x1, x2, x3],   -
+ *         """
  *         return f"[{', '.join(str(i) for i in self)}]"             # <<<<<<<<<<<<<<
  * 
  *     def __repr__(self) -> str:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 219, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 322, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = 0;
   __pyx_t_3 = 127;
-  __Pyx_INCREF(__pyx_kp_u__5);
+  __Pyx_INCREF(__pyx_kp_u__7);
   __pyx_t_2 += 1;
-  __Pyx_GIVEREF(__pyx_kp_u__5);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u__5);
-  __pyx_t_4 = __pyx_pf_11cython_code_8my_array_5array_7__str___genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 219, __pyx_L1_error)
+  __Pyx_GIVEREF(__pyx_kp_u__7);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u__7);
+  __pyx_t_4 = __pyx_pf_11cython_code_8my_array_5array_7__str___genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 322, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_Generator_Next(__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 219, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyString_Join(__pyx_kp_s__8, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 322, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyUnicode_Join(__pyx_kp_u__6, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 219, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 322, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) : __pyx_t_3;
@@ -5122,23 +5282,23 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_30__str__(struct __pyx_
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4);
   __pyx_t_4 = 0;
-  __Pyx_INCREF(__pyx_kp_u__7);
+  __Pyx_INCREF(__pyx_kp_u__9);
   __pyx_t_2 += 1;
-  __Pyx_GIVEREF(__pyx_kp_u__7);
-  PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_kp_u__7);
-  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 219, __pyx_L1_error)
+  __Pyx_GIVEREF(__pyx_kp_u__9);
+  PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_kp_u__9);
+  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 322, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "cython_code/my_array.pyx":217
+  /* "cython_code/my_array.pyx":317
  *         return True
  * 
  *     def __str__(self) -> str:             # <<<<<<<<<<<<<<
+ *         """
  * 
- *         return f"[{', '.join(str(i) for i in self)}]"
  */
 
   /* function exit code */
@@ -5156,16 +5316,20 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_30__str__(struct __pyx_
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":221
+/* "cython_code/my_array.pyx":324
  *         return f"[{', '.join(str(i) for i in self)}]"
  * 
  *     def __repr__(self) -> str:             # <<<<<<<<<<<<<<
+ *         """
  * 
- *         return f"[{', '.join(str(i) for i in self)}]"
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_33__repr__(PyObject *__pyx_v_self); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_32__repr__[] = "\n        \320\222\320\276\320\267\320\262\321\200\320\260\321\211\320\260\320\265\321\202 \321\202\320\265\320\272\321\201\321\202\320\276\320\262\320\276\320\265 \320\277\321\200\320\265\320\264\321\201\321\202\320\260\320\262\320\273\320\265\320\275\320\270\320\265 \320\274\320\260\321\201\321\201\320\270\320\262\320\260\n        :return: \320\241\321\202\321\200\320\276\320\272\320\260 \320\262 \320\262\320\270\320\264\320\265 [x1, x2, x3], \321\201\320\276\320\264\320\265\321\200\320\266\320\260\321\211\320\260\321\217 \320\262\321\201\320\265 \321\215\320\273-\321\202\321\213 \320\274\320\260\321\201\321\201\320\270\320\262\320\260\n        ";
+#if CYTHON_UPDATE_DESCRIPTOR_DOC
+struct wrapperbase __pyx_wrapperbase_11cython_code_8my_array_5array_32__repr__;
+#endif
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_33__repr__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -5178,9 +5342,9 @@ static PyObject *__pyx_pw_11cython_code_8my_array_5array_33__repr__(PyObject *__
 }
 static PyObject *__pyx_gb_11cython_code_8my_array_5array_8__repr___2generator1(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "cython_code/my_array.pyx":223
- *     def __repr__(self) -> str:
- * 
+/* "cython_code/my_array.pyx":329
+ *         :return:    [x1, x2, x3],   -
+ *         """
  *         return f"[{', '.join(str(i) for i in self)}]"             # <<<<<<<<<<<<<<
  * 
  *     def __sizeof__(self) -> size_t:
@@ -5198,7 +5362,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_8__repr___genexpr(PyObj
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct_3_genexpr *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 223, __pyx_L1_error)
+    __PYX_ERR(0, 329, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -5206,7 +5370,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_8__repr___genexpr(PyObj
   __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_outer_scope));
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_outer_scope);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_11cython_code_8my_array_5array_8__repr___2generator1, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_repr___locals_genexpr, __pyx_n_s_cython_code_my_array); if (unlikely(!gen)) __PYX_ERR(0, 223, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_11cython_code_8my_array_5array_8__repr___2generator1, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_repr___locals_genexpr, __pyx_n_s_cython_code_my_array); if (unlikely(!gen)) __PYX_ERR(0, 329, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -5237,39 +5401,38 @@ static PyObject *__pyx_gb_11cython_code_8my_array_5array_8__repr___2generator1(_
   __Pyx_RefNannySetupContext("genexpr", 0);
   switch (__pyx_generator->resume_label) {
     case 0: goto __pyx_L3_first_run;
+    case 1: goto __pyx_L6_resume_from_yield;
     default: /* CPython raises the right error here */
     __Pyx_RefNannyFinishContext();
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 223, __pyx_L1_error)
-  __pyx_r = PyList_New(0); if (unlikely(!__pyx_r)) __PYX_ERR(0, 223, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_r);
-  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 223, __pyx_L1_error) }
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 329, __pyx_L1_error)
+  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 329, __pyx_L1_error) }
   if (likely(PyList_CheckExact(((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self))) || PyTuple_CheckExact(((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self))) {
     __pyx_t_1 = ((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self); __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
     __pyx_t_3 = NULL;
   } else {
-    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 223, __pyx_L1_error)
+    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 329, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 223, __pyx_L1_error)
+    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 329, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_3)) {
       if (likely(PyList_CheckExact(__pyx_t_1))) {
         if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 223, __pyx_L1_error)
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 329, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 223, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 329, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       } else {
         if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 223, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 329, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 223, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 329, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       }
@@ -5279,7 +5442,7 @@ static PyObject *__pyx_gb_11cython_code_8my_array_5array_8__repr___2generator1(_
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 223, __pyx_L1_error)
+          else __PYX_ERR(0, 329, __pyx_L1_error)
         }
         break;
       }
@@ -5289,23 +5452,40 @@ static PyObject *__pyx_gb_11cython_code_8my_array_5array_8__repr___2generator1(_
     __Pyx_XDECREF_SET(__pyx_cur_scope->__pyx_v_i, __pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_cur_scope->__pyx_v_i); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 223, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_cur_scope->__pyx_v_i); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 329, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (unlikely(__Pyx_ListComp_Append(__pyx_r, (PyObject*)__pyx_t_4))) __PYX_ERR(0, 223, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_r = __pyx_t_4;
+    __pyx_t_4 = 0;
+    __Pyx_XGIVEREF(__pyx_t_1);
+    __pyx_cur_scope->__pyx_t_0 = __pyx_t_1;
+    __pyx_cur_scope->__pyx_t_1 = __pyx_t_2;
+    __pyx_cur_scope->__pyx_t_2 = __pyx_t_3;
+    __Pyx_XGIVEREF(__pyx_r);
+    __Pyx_RefNannyFinishContext();
+    __Pyx_Coroutine_ResetAndClearException(__pyx_generator);
+    /* return from generator, yielding value */
+    __pyx_generator->resume_label = 1;
+    return __pyx_r;
+    __pyx_L6_resume_from_yield:;
+    __pyx_t_1 = __pyx_cur_scope->__pyx_t_0;
+    __pyx_cur_scope->__pyx_t_0 = 0;
+    __Pyx_XGOTREF(__pyx_t_1);
+    __pyx_t_2 = __pyx_cur_scope->__pyx_t_1;
+    __pyx_t_3 = __pyx_cur_scope->__pyx_t_2;
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 329, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
   /* function exit code */
+  PyErr_SetNone(PyExc_StopIteration);
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_r); __pyx_r = 0;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_AddTraceback("genexpr", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_XDECREF(__pyx_r); __pyx_r = 0;
   #if !CYTHON_USE_EXC_INFO_STACK
   __Pyx_Coroutine_ResetAndClearException(__pyx_generator);
   #endif
@@ -5315,12 +5495,12 @@ static PyObject *__pyx_gb_11cython_code_8my_array_5array_8__repr___2generator1(_
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":221
+/* "cython_code/my_array.pyx":324
  *         return f"[{', '.join(str(i) for i in self)}]"
  * 
  *     def __repr__(self) -> str:             # <<<<<<<<<<<<<<
+ *         """
  * 
- *         return f"[{', '.join(str(i) for i in self)}]"
  */
 
 static PyObject *__pyx_pf_11cython_code_8my_array_5array_32__repr__(struct __pyx_obj_11cython_code_8my_array_array *__pyx_v_self) {
@@ -5341,7 +5521,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_32__repr__(struct __pyx
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct_2___repr__ *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 221, __pyx_L1_error)
+    __PYX_ERR(0, 324, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -5349,28 +5529,28 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_32__repr__(struct __pyx
   __Pyx_INCREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
 
-  /* "cython_code/my_array.pyx":223
- *     def __repr__(self) -> str:
- * 
+  /* "cython_code/my_array.pyx":329
+ *         :return:    [x1, x2, x3],   -
+ *         """
  *         return f"[{', '.join(str(i) for i in self)}]"             # <<<<<<<<<<<<<<
  * 
  *     def __sizeof__(self) -> size_t:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 223, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 329, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = 0;
   __pyx_t_3 = 127;
-  __Pyx_INCREF(__pyx_kp_u__5);
+  __Pyx_INCREF(__pyx_kp_u__7);
   __pyx_t_2 += 1;
-  __Pyx_GIVEREF(__pyx_kp_u__5);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u__5);
-  __pyx_t_4 = __pyx_pf_11cython_code_8my_array_5array_8__repr___genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 223, __pyx_L1_error)
+  __Pyx_GIVEREF(__pyx_kp_u__7);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u__7);
+  __pyx_t_4 = __pyx_pf_11cython_code_8my_array_5array_8__repr___genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 329, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_Generator_Next(__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 223, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyString_Join(__pyx_kp_s__8, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 329, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyUnicode_Join(__pyx_kp_u__6, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 223, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 329, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) : __pyx_t_3;
@@ -5378,23 +5558,23 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_32__repr__(struct __pyx
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4);
   __pyx_t_4 = 0;
-  __Pyx_INCREF(__pyx_kp_u__7);
+  __Pyx_INCREF(__pyx_kp_u__9);
   __pyx_t_2 += 1;
-  __Pyx_GIVEREF(__pyx_kp_u__7);
-  PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_kp_u__7);
-  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 223, __pyx_L1_error)
+  __Pyx_GIVEREF(__pyx_kp_u__9);
+  PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_kp_u__9);
+  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 329, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "cython_code/my_array.pyx":221
+  /* "cython_code/my_array.pyx":324
  *         return f"[{', '.join(str(i) for i in self)}]"
  * 
  *     def __repr__(self) -> str:             # <<<<<<<<<<<<<<
+ *         """
  * 
- *         return f"[{', '.join(str(i) for i in self)}]"
  */
 
   /* function exit code */
@@ -5412,16 +5592,17 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_32__repr__(struct __pyx
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":225
+/* "cython_code/my_array.pyx":331
  *         return f"[{', '.join(str(i) for i in self)}]"
  * 
  *     def __sizeof__(self) -> size_t:             # <<<<<<<<<<<<<<
- *         return self.size * self.descr.itemsize
+ *         """
  * 
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_35__sizeof__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_11cython_code_8my_array_5array_34__sizeof__[] = "\n        \320\222\320\276\320\267\320\262\321\200\320\260\321\211\320\260\320\265\321\202 \320\267\320\260\320\275\320\270\320\274\320\260\320\265\320\274\321\203\321\216 \320\274\320\260\321\201\321\201\320\270\320\262\320\276\320\274 \320\277\320\260\320\274\321\217\321\202\321\214\n        :return: \320\232\320\276\320\273\320\270\321\207\320\265\321\201\321\202\320\262\320\276 \320\267\320\260\320\275\320\270\320\274\320\260\320\265\320\274\320\276\320\271 \320\277\320\260\320\274\321\217\321\202\320\270\n        ";
 static PyObject *__pyx_pw_11cython_code_8my_array_5array_35__sizeof__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -5442,25 +5623,23 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_34__sizeof__(struct __p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__sizeof__", 0);
 
-  /* "cython_code/my_array.pyx":226
- * 
- *     def __sizeof__(self) -> size_t:
+  /* "cython_code/my_array.pyx":336
+ *         :return:
+ *         """
  *         return self.size * self.descr.itemsize             # <<<<<<<<<<<<<<
- * 
- * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_FromSize_t((__pyx_v_self->size * __pyx_v_self->descr->itemsize)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t((__pyx_v_self->size * __pyx_v_self->descr->itemsize)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cython_code/my_array.pyx":225
+  /* "cython_code/my_array.pyx":331
  *         return f"[{', '.join(str(i) for i in self)}]"
  * 
  *     def __sizeof__(self) -> size_t:             # <<<<<<<<<<<<<<
- *         return self.size * self.descr.itemsize
+ *         """
  * 
  */
 
@@ -5475,9 +5654,9 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_34__sizeof__(struct __p
   return __pyx_r;
 }
 
-/* "cython_code/my_array.pyx":90
- *     #       . ,
- *     #   double  8   char.
+/* "cython_code/my_array.pyx":125
+ *         int  float
+ *     """
  *     cdef public size_t length, size             # <<<<<<<<<<<<<<
  *     cdef char * data
  *     cdef arraydescr * descr
@@ -5505,7 +5684,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_6length___get__(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_v_self->length); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_v_self->length); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5543,7 +5722,7 @@ static int __pyx_pf_11cython_code_8my_array_5array_6length_2__set__(struct __pyx
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __pyx_t_1 = __Pyx_PyInt_As_size_t(__pyx_v_value); if (unlikely((__pyx_t_1 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_size_t(__pyx_v_value); if (unlikely((__pyx_t_1 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 125, __pyx_L1_error)
   __pyx_v_self->length = __pyx_t_1;
 
   /* function exit code */
@@ -5579,7 +5758,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_4size___get__(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_v_self->size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_v_self->size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5617,7 +5796,7 @@ static int __pyx_pf_11cython_code_8my_array_5array_4size_2__set__(struct __pyx_o
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __pyx_t_1 = __Pyx_PyInt_As_size_t(__pyx_v_value); if (unlikely((__pyx_t_1 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_size_t(__pyx_v_value); if (unlikely((__pyx_t_1 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 125, __pyx_L1_error)
   __pyx_v_self->size = __pyx_t_1;
 
   /* function exit code */
@@ -5665,7 +5844,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_36__reduce_cython__(CYT
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("self.descr cannot be converted to a Python object for pickling")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5721,7 +5900,7 @@ static PyObject *__pyx_pf_11cython_code_8my_array_5array_38__setstate_cython__(C
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("self.descr cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5904,7 +6083,7 @@ static PyObject *__Pyx_CFunc_object____array____size__t___to_py(PyObject *(*__py
  *         """wrap(a: 'array', index: 'size_t')"""
  *         return f(a, index)
  */
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_11cfunc_dot_to_py_46__Pyx_CFunc_object____array____size__t___to_py_1wrap, 0, __pyx_n_s_Pyx_CFunc_object____array____s, ((PyObject*)__pyx_cur_scope), __pyx_n_s_cfunc_to_py, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 65, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_11cfunc_dot_to_py_46__Pyx_CFunc_object____array____size__t___to_py_1wrap, 0, __pyx_n_s_Pyx_CFunc_object____array____s, ((PyObject*)__pyx_cur_scope), __pyx_n_s_cfunc_to_py, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_wrap = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -6115,7 +6294,7 @@ static PyObject *__Pyx_CFunc_int____array____size__t____object___to_py(int (*__p
  *         """wrap(a: 'array', index: 'size_t', obj) -> 'int'"""
  *         return f(a, index, obj)
  */
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_11cfunc_dot_to_py_53__Pyx_CFunc_int____array____size__t____object___to_py_1wrap, 0, __pyx_n_s_Pyx_CFunc_int____array____size, ((PyObject*)__pyx_cur_scope), __pyx_n_s_cfunc_to_py, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 65, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_11cfunc_dot_to_py_53__Pyx_CFunc_int____array____size__t____object___to_py_1wrap, 0, __pyx_n_s_Pyx_CFunc_int____array____size, ((PyObject*)__pyx_cur_scope), __pyx_n_s_cfunc_to_py, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_wrap = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -6250,16 +6429,16 @@ static int __pyx_setprop_11cython_code_8my_array_5array_size(PyObject *o, PyObje
 }
 
 static PyMethodDef __pyx_methods_11cython_code_8my_array_array[] = {
-  {"extend_array", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_3extend_array, METH_NOARGS, 0},
-  {"extend_by_array", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_5extend_by_array, METH_O, 0},
-  {"shorten_array", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_7shorten_array, METH_NOARGS, 0},
-  {"mem_upd", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_9mem_upd, METH_NOARGS, 0},
-  {"append", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_11append, METH_O, 0},
-  {"extend", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_13extend, METH_O, 0},
-  {"insert", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_11cython_code_8my_array_5array_15insert, METH_VARARGS|METH_KEYWORDS, 0},
-  {"remove", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_17remove, METH_O, 0},
-  {"pop", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_11cython_code_8my_array_5array_19pop, METH_VARARGS|METH_KEYWORDS, 0},
-  {"__sizeof__", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_35__sizeof__, METH_NOARGS, 0},
+  {"extend_array", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_3extend_array, METH_NOARGS, __pyx_doc_11cython_code_8my_array_5array_2extend_array},
+  {"extend_by_array", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_5extend_by_array, METH_O, __pyx_doc_11cython_code_8my_array_5array_4extend_by_array},
+  {"shorten_array", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_7shorten_array, METH_NOARGS, __pyx_doc_11cython_code_8my_array_5array_6shorten_array},
+  {"mem_upd", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_9mem_upd, METH_NOARGS, __pyx_doc_11cython_code_8my_array_5array_8mem_upd},
+  {"append", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_11append, METH_O, __pyx_doc_11cython_code_8my_array_5array_10append},
+  {"extend", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_13extend, METH_O, __pyx_doc_11cython_code_8my_array_5array_12extend},
+  {"insert", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_11cython_code_8my_array_5array_15insert, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11cython_code_8my_array_5array_14insert},
+  {"remove", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_17remove, METH_O, __pyx_doc_11cython_code_8my_array_5array_16remove},
+  {"pop", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_11cython_code_8my_array_5array_19pop, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11cython_code_8my_array_5array_18pop},
+  {"__sizeof__", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_35__sizeof__, METH_NOARGS, __pyx_doc_11cython_code_8my_array_5array_34__sizeof__},
   {"__reduce_cython__", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_37__reduce_cython__, METH_NOARGS, 0},
   {"__setstate_cython__", (PyCFunction)__pyx_pw_11cython_code_8my_array_5array_39__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
@@ -6321,7 +6500,7 @@ static PyTypeObject __pyx_type_11cython_code_8my_array_array = {
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE, /*tp_flags*/
-  0, /*tp_doc*/
+  "\n    \320\232\320\273\320\260\321\201\321\201 \320\264\320\270\320\275\320\260\320\274\320\270\321\207\320\265\321\201\320\272\320\276\320\263\320\276 \320\274\320\260\321\201\321\201\320\270\320\262\320\260, \321\200\320\265\320\260\320\273\320\270\320\267\321\203\321\216\321\211\320\270\320\271 \320\276\321\201\320\275\320\276\320\262\320\275\321\213\320\265 \320\274\320\265\321\202\320\276\320\264\321\213 list \320\262 python,\n    \321\201 \320\277\320\276\320\264\320\264\320\265\321\200\320\266\320\272\320\276\320\271 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\271 \321\202\320\270\320\277\320\260 int \320\270 float\n    ", /*tp_doc*/
   0, /*tp_traverse*/
   0, /*tp_clear*/
   __pyx_tp_richcompare_11cython_code_8my_array_array, /*tp_richcompare*/
@@ -6502,6 +6681,7 @@ static void __pyx_tp_dealloc_11cython_code_8my_array___pyx_scope_struct_1_genexp
   PyObject_GC_UnTrack(o);
   Py_CLEAR(p->__pyx_outer_scope);
   Py_CLEAR(p->__pyx_v_i);
+  Py_CLEAR(p->__pyx_t_0);
   if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_11cython_code_8my_array___pyx_scope_struct_1_genexpr < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct_1_genexpr)))) {
     __pyx_freelist_11cython_code_8my_array___pyx_scope_struct_1_genexpr[__pyx_freecount_11cython_code_8my_array___pyx_scope_struct_1_genexpr++] = ((struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct_1_genexpr *)o);
   } else {
@@ -6517,6 +6697,9 @@ static int __pyx_tp_traverse_11cython_code_8my_array___pyx_scope_struct_1_genexp
   }
   if (p->__pyx_v_i) {
     e = (*v)(p->__pyx_v_i, a); if (e) return e;
+  }
+  if (p->__pyx_t_0) {
+    e = (*v)(p->__pyx_t_0, a); if (e) return e;
   }
   return 0;
 }
@@ -6733,6 +6916,7 @@ static void __pyx_tp_dealloc_11cython_code_8my_array___pyx_scope_struct_3_genexp
   PyObject_GC_UnTrack(o);
   Py_CLEAR(p->__pyx_outer_scope);
   Py_CLEAR(p->__pyx_v_i);
+  Py_CLEAR(p->__pyx_t_0);
   if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_11cython_code_8my_array___pyx_scope_struct_3_genexpr < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct_3_genexpr)))) {
     __pyx_freelist_11cython_code_8my_array___pyx_scope_struct_3_genexpr[__pyx_freecount_11cython_code_8my_array___pyx_scope_struct_3_genexpr++] = ((struct __pyx_obj_11cython_code_8my_array___pyx_scope_struct_3_genexpr *)o);
   } else {
@@ -6748,6 +6932,9 @@ static int __pyx_tp_traverse_11cython_code_8my_array___pyx_scope_struct_3_genexp
   }
   if (p->__pyx_v_i) {
     e = (*v)(p->__pyx_v_i, a); if (e) return e;
+  }
+  if (p->__pyx_t_0) {
+    e = (*v)(p->__pyx_t_0, a); if (e) return e;
   }
   return 0;
 }
@@ -7034,7 +7221,7 @@ static PyModuleDef_Slot __pyx_moduledef_slots[] = {
 static struct PyModuleDef __pyx_moduledef = {
     PyModuleDef_HEAD_INIT,
     "my_array",
-    0, /* m_doc */
+    __pyx_k_Python_Cython_append_extend_ins, /* m_doc */
   #if CYTHON_PEP489_MULTI_PHASE_INIT
     0, /* m_size */
   #else
@@ -7062,15 +7249,17 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_kp_u_Incorrect_type_of_argument, __pyx_k_Incorrect_type_of_argument, sizeof(__pyx_k_Incorrect_type_of_argument), 0, 1, 0, 0},
+  {&__pyx_kp_u_Incorrect_type_of_values, __pyx_k_Incorrect_type_of_values, sizeof(__pyx_k_Incorrect_type_of_values), 0, 1, 0, 0},
   {&__pyx_n_s_IndexError, __pyx_k_IndexError, sizeof(__pyx_k_IndexError), 0, 0, 1, 1},
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
   {&__pyx_n_s_Pyx_CFunc_int____array____size, __pyx_k_Pyx_CFunc_int____array____size, sizeof(__pyx_k_Pyx_CFunc_int____array____size), 0, 0, 1, 1},
   {&__pyx_n_s_Pyx_CFunc_object____array____s, __pyx_k_Pyx_CFunc_object____array____s, sizeof(__pyx_k_Pyx_CFunc_object____array____s), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
-  {&__pyx_kp_u__5, __pyx_k__5, sizeof(__pyx_k__5), 0, 1, 0, 0},
-  {&__pyx_kp_u__6, __pyx_k__6, sizeof(__pyx_k__6), 0, 1, 0, 0},
   {&__pyx_kp_u__7, __pyx_k__7, sizeof(__pyx_k__7), 0, 1, 0, 0},
+  {&__pyx_kp_s__8, __pyx_k__8, sizeof(__pyx_k__8), 0, 0, 1, 0},
+  {&__pyx_kp_u__9, __pyx_k__9, sizeof(__pyx_k__9), 0, 1, 0, 0},
   {&__pyx_n_s_a, __pyx_k_a, sizeof(__pyx_k_a), 0, 0, 1, 1},
   {&__pyx_n_s_append, __pyx_k_append, sizeof(__pyx_k_append), 0, 0, 1, 1},
   {&__pyx_n_s_args, __pyx_k_args, sizeof(__pyx_k_args), 0, 0, 1, 1},
@@ -7080,20 +7269,21 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_close, __pyx_k_close, sizeof(__pyx_k_close), 0, 0, 1, 1},
   {&__pyx_n_s_cython_code_my_array, __pyx_k_cython_code_my_array, sizeof(__pyx_k_cython_code_my_array), 0, 0, 1, 1},
-  {&__pyx_n_u_d, __pyx_k_d, sizeof(__pyx_k_d), 0, 1, 0, 1},
+  {&__pyx_n_s_d, __pyx_k_d, sizeof(__pyx_k_d), 0, 0, 1, 1},
   {&__pyx_n_s_eq_array, __pyx_k_eq_array, sizeof(__pyx_k_eq_array), 0, 0, 1, 1},
   {&__pyx_n_s_extend_array, __pyx_k_extend_array, sizeof(__pyx_k_extend_array), 0, 0, 1, 1},
   {&__pyx_n_s_extend_by_array, __pyx_k_extend_by_array, sizeof(__pyx_k_extend_by_array), 0, 0, 1, 1},
   {&__pyx_n_s_genexpr, __pyx_k_genexpr, sizeof(__pyx_k_genexpr), 0, 0, 1, 1},
   {&__pyx_n_s_getitem, __pyx_k_getitem, sizeof(__pyx_k_getitem), 0, 0, 1, 1},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
-  {&__pyx_n_u_i, __pyx_k_i, sizeof(__pyx_k_i), 0, 1, 0, 1},
+  {&__pyx_n_s_i, __pyx_k_i, sizeof(__pyx_k_i), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_index, __pyx_k_index, sizeof(__pyx_k_index), 0, 0, 1, 1},
   {&__pyx_n_s_initialise, __pyx_k_initialise, sizeof(__pyx_k_initialise), 0, 0, 1, 1},
   {&__pyx_n_s_item, __pyx_k_item, sizeof(__pyx_k_item), 0, 0, 1, 1},
   {&__pyx_n_s_itemsize, __pyx_k_itemsize, sizeof(__pyx_k_itemsize), 0, 0, 1, 1},
-  {&__pyx_kp_u_list_index_out_of_range, __pyx_k_list_index_out_of_range, sizeof(__pyx_k_list_index_out_of_range), 0, 1, 0, 0},
+  {&__pyx_n_s_join, __pyx_k_join, sizeof(__pyx_k_join), 0, 0, 1, 1},
+  {&__pyx_kp_s_list_index_out_of_range, __pyx_k_list_index_out_of_range, sizeof(__pyx_k_list_index_out_of_range), 0, 0, 1, 0},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_mem_upd, __pyx_k_mem_upd, sizeof(__pyx_k_mem_upd), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
@@ -7121,11 +7311,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 106, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 108, __pyx_L1_error)
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 121, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 168, __pyx_L1_error)
-  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 168, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 241, __pyx_L1_error)
+  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) __PYX_ERR(0, 253, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -7135,49 +7325,71 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "cython_code/my_array.pyx":168
+  /* "cython_code/my_array.pyx":201
+ *         """
+ *         if not isinstance(ext_arr, array):
+ *             raise TypeError(f"Incorrect type of argument")             # <<<<<<<<<<<<<<
+ *         if self.descr != ext_arr.descr:
+ *             raise TypeError(f"Incorrect type of values")
+ */
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_Incorrect_type_of_argument); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 201, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple_);
+  __Pyx_GIVEREF(__pyx_tuple_);
+
+  /* "cython_code/my_array.pyx":203
+ *             raise TypeError(f"Incorrect type of argument")
+ *         if self.descr != ext_arr.descr:
+ *             raise TypeError(f"Incorrect type of values")             # <<<<<<<<<<<<<<
+ *         self.extend_by_array(ext_arr)
+ *         cdef long i
+ */
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_Incorrect_type_of_values); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__2);
+  __Pyx_GIVEREF(__pyx_tuple__2);
+
+  /* "cython_code/my_array.pyx":241
  *                 self[i] = self[i + 1]
  *         if not is_find:
  *             raise ValueError(f"array.remove(item): item not in array")             # <<<<<<<<<<<<<<
  *         self.length -= 1
  *         self.shorten_array()
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_array_remove_item_item_not_in_ar); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 168, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple_);
-  __Pyx_GIVEREF(__pyx_tuple_);
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_array_remove_item_item_not_in_ar); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 241, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__3);
+  __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "cython_code/my_array.pyx":174
- *     def pop(self, index: int | None = None) -> object:
+  /* "cython_code/my_array.pyx":253
+ *         """
  *         if self.length == 0:
  *             raise IndexError(f"pop from empty list")             # <<<<<<<<<<<<<<
  *         if index is None:
  *             pop_val = self[self.length - 1]
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_pop_from_empty_list); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 174, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__2);
-  __Pyx_GIVEREF(__pyx_tuple__2);
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_pop_from_empty_list); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__4);
+  __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "cython_code/my_array.pyx":180
+  /* "cython_code/my_array.pyx":259
  *             return pop_val
  *         if -index > self.length or index >= self.length:
  *             raise IndexError(f"pop index out of range")             # <<<<<<<<<<<<<<
  *         index = index_validate(index, self.length)
  *         pop_val = self[index]
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_pop_index_out_of_range); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 180, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__3);
-  __Pyx_GIVEREF(__pyx_tuple__3);
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_pop_index_out_of_range); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 259, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__5);
+  __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "cython_code/my_array.pyx":195
+  /* "cython_code/my_array.pyx":282
  *         if 0 <= index < self.length:
  *             return self.descr.getitem(self, index)
  *         raise IndexError("list index out of range")             # <<<<<<<<<<<<<<
  * 
  *     def __setitem__(self, index: int, value: object) -> None:
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_list_index_out_of_range); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 195, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__4);
-  __Pyx_GIVEREF(__pyx_tuple__4);
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_list_index_out_of_range); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 282, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
@@ -7185,18 +7397,18 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("self.descr cannot be converted to a Python object for pickling")
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_s_self_descr_cannot_be_converted_t); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(1, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__8);
-  __Pyx_GIVEREF(__pyx_tuple__8);
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_self_descr_cannot_be_converted_t); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__10);
+  __Pyx_GIVEREF(__pyx_tuple__10);
 
   /* "(tree fragment)":4
  *     raise TypeError("self.descr cannot be converted to a Python object for pickling")
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("self.descr cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_self_descr_cannot_be_converted_t); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(1, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
+  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_kp_s_self_descr_cannot_be_converted_t); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__11);
+  __Pyx_GIVEREF(__pyx_tuple__11);
 
   /* "cfunc.to_py":65
  * @cname("__Pyx_CFunc_object____array____size__t___to_py")
@@ -7205,14 +7417,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         """wrap(a: 'array', index: 'size_t')"""
  *         return f(a, index)
  */
-  __pyx_tuple__10 = PyTuple_Pack(2, __pyx_n_s_a, __pyx_n_s_index); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(1, 65, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__10);
-  __Pyx_GIVEREF(__pyx_tuple__10);
-  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_wrap, 65, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(1, 65, __pyx_L1_error)
-  __pyx_tuple__12 = PyTuple_Pack(3, __pyx_n_s_a, __pyx_n_s_index, __pyx_n_s_obj); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(1, 65, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(2, __pyx_n_s_a, __pyx_n_s_index); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(1, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
-  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_wrap, 65, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(1, 65, __pyx_L1_error)
+  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_wrap, 65, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(1, 65, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(3, __pyx_n_s_a, __pyx_n_s_index, __pyx_n_s_obj); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(1, 65, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__14);
+  __Pyx_GIVEREF(__pyx_tuple__14);
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_wrap, 65, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(1, 65, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -7269,17 +7481,87 @@ static int __Pyx_modinit_type_init_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_11cython_code_8my_array_array) < 0) __PYX_ERR(0, 83, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_11cython_code_8my_array_array) < 0) __PYX_ERR(0, 120, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_11cython_code_8my_array_array.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_11cython_code_8my_array_array.tp_dictoffset && __pyx_type_11cython_code_8my_array_array.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_11cython_code_8my_array_array.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_array, (PyObject *)&__pyx_type_11cython_code_8my_array_array) < 0) __PYX_ERR(0, 83, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_11cython_code_8my_array_array) < 0) __PYX_ERR(0, 83, __pyx_L1_error)
+  #if CYTHON_UPDATE_DESCRIPTOR_DOC
+  {
+    PyObject *wrapper = PyObject_GetAttrString((PyObject *)&__pyx_type_11cython_code_8my_array_array, "__init__"); if (unlikely(!wrapper)) __PYX_ERR(0, 120, __pyx_L1_error)
+    if (Py_TYPE(wrapper) == &PyWrapperDescr_Type) {
+      __pyx_wrapperbase_11cython_code_8my_array_5array___init__ = *((PyWrapperDescrObject *)wrapper)->d_base;
+      __pyx_wrapperbase_11cython_code_8my_array_5array___init__.doc = __pyx_doc_11cython_code_8my_array_5array___init__;
+      ((PyWrapperDescrObject *)wrapper)->d_base = &__pyx_wrapperbase_11cython_code_8my_array_5array___init__;
+    }
+  }
+  #endif
+  #if CYTHON_UPDATE_DESCRIPTOR_DOC
+  {
+    PyObject *wrapper = PyObject_GetAttrString((PyObject *)&__pyx_type_11cython_code_8my_array_array, "__getitem__"); if (unlikely(!wrapper)) __PYX_ERR(0, 120, __pyx_L1_error)
+    if (Py_TYPE(wrapper) == &PyWrapperDescr_Type) {
+      __pyx_wrapperbase_11cython_code_8my_array_5array_22__getitem__ = *((PyWrapperDescrObject *)wrapper)->d_base;
+      __pyx_wrapperbase_11cython_code_8my_array_5array_22__getitem__.doc = __pyx_doc_11cython_code_8my_array_5array_22__getitem__;
+      ((PyWrapperDescrObject *)wrapper)->d_base = &__pyx_wrapperbase_11cython_code_8my_array_5array_22__getitem__;
+    }
+  }
+  #endif
+  #if CYTHON_UPDATE_DESCRIPTOR_DOC
+  {
+    PyObject *wrapper = PyObject_GetAttrString((PyObject *)&__pyx_type_11cython_code_8my_array_array, "__setitem__"); if (unlikely(!wrapper)) __PYX_ERR(0, 120, __pyx_L1_error)
+    if (Py_TYPE(wrapper) == &PyWrapperDescr_Type) {
+      __pyx_wrapperbase_11cython_code_8my_array_5array_24__setitem__ = *((PyWrapperDescrObject *)wrapper)->d_base;
+      __pyx_wrapperbase_11cython_code_8my_array_5array_24__setitem__.doc = __pyx_doc_11cython_code_8my_array_5array_24__setitem__;
+      ((PyWrapperDescrObject *)wrapper)->d_base = &__pyx_wrapperbase_11cython_code_8my_array_5array_24__setitem__;
+    }
+  }
+  #endif
+  #if CYTHON_UPDATE_DESCRIPTOR_DOC
+  {
+    PyObject *wrapper = PyObject_GetAttrString((PyObject *)&__pyx_type_11cython_code_8my_array_array, "__len__"); if (unlikely(!wrapper)) __PYX_ERR(0, 120, __pyx_L1_error)
+    if (Py_TYPE(wrapper) == &PyWrapperDescr_Type) {
+      __pyx_wrapperbase_11cython_code_8my_array_5array_26__len__ = *((PyWrapperDescrObject *)wrapper)->d_base;
+      __pyx_wrapperbase_11cython_code_8my_array_5array_26__len__.doc = __pyx_doc_11cython_code_8my_array_5array_26__len__;
+      ((PyWrapperDescrObject *)wrapper)->d_base = &__pyx_wrapperbase_11cython_code_8my_array_5array_26__len__;
+    }
+  }
+  #endif
+  #if CYTHON_UPDATE_DESCRIPTOR_DOC
+  {
+    PyObject *wrapper = PyObject_GetAttrString((PyObject *)&__pyx_type_11cython_code_8my_array_array, "__eq__"); if (unlikely(!wrapper)) __PYX_ERR(0, 120, __pyx_L1_error)
+    if (Py_TYPE(wrapper) == &PyWrapperDescr_Type) {
+      __pyx_wrapperbase_11cython_code_8my_array_5array_28__eq__ = *((PyWrapperDescrObject *)wrapper)->d_base;
+      __pyx_wrapperbase_11cython_code_8my_array_5array_28__eq__.doc = __pyx_doc_11cython_code_8my_array_5array_28__eq__;
+      ((PyWrapperDescrObject *)wrapper)->d_base = &__pyx_wrapperbase_11cython_code_8my_array_5array_28__eq__;
+    }
+  }
+  #endif
+  #if CYTHON_UPDATE_DESCRIPTOR_DOC
+  {
+    PyObject *wrapper = PyObject_GetAttrString((PyObject *)&__pyx_type_11cython_code_8my_array_array, "__str__"); if (unlikely(!wrapper)) __PYX_ERR(0, 120, __pyx_L1_error)
+    if (Py_TYPE(wrapper) == &PyWrapperDescr_Type) {
+      __pyx_wrapperbase_11cython_code_8my_array_5array_30__str__ = *((PyWrapperDescrObject *)wrapper)->d_base;
+      __pyx_wrapperbase_11cython_code_8my_array_5array_30__str__.doc = __pyx_doc_11cython_code_8my_array_5array_30__str__;
+      ((PyWrapperDescrObject *)wrapper)->d_base = &__pyx_wrapperbase_11cython_code_8my_array_5array_30__str__;
+    }
+  }
+  #endif
+  #if CYTHON_UPDATE_DESCRIPTOR_DOC
+  {
+    PyObject *wrapper = PyObject_GetAttrString((PyObject *)&__pyx_type_11cython_code_8my_array_array, "__repr__"); if (unlikely(!wrapper)) __PYX_ERR(0, 120, __pyx_L1_error)
+    if (Py_TYPE(wrapper) == &PyWrapperDescr_Type) {
+      __pyx_wrapperbase_11cython_code_8my_array_5array_32__repr__ = *((PyWrapperDescrObject *)wrapper)->d_base;
+      __pyx_wrapperbase_11cython_code_8my_array_5array_32__repr__.doc = __pyx_doc_11cython_code_8my_array_5array_32__repr__;
+      ((PyWrapperDescrObject *)wrapper)->d_base = &__pyx_wrapperbase_11cython_code_8my_array_5array_32__repr__;
+    }
+  }
+  #endif
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_array, (PyObject *)&__pyx_type_11cython_code_8my_array_array) < 0) __PYX_ERR(0, 120, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_11cython_code_8my_array_array) < 0) __PYX_ERR(0, 120, __pyx_L1_error)
   __pyx_ptype_11cython_code_8my_array_array = &__pyx_type_11cython_code_8my_array_array;
-  if (PyType_Ready(&__pyx_type_11cython_code_8my_array___pyx_scope_struct____str__) < 0) __PYX_ERR(0, 217, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_11cython_code_8my_array___pyx_scope_struct____str__) < 0) __PYX_ERR(0, 317, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_11cython_code_8my_array___pyx_scope_struct____str__.tp_print = 0;
   #endif
@@ -7287,7 +7569,7 @@ static int __Pyx_modinit_type_init_code(void) {
     __pyx_type_11cython_code_8my_array___pyx_scope_struct____str__.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_11cython_code_8my_array___pyx_scope_struct____str__ = &__pyx_type_11cython_code_8my_array___pyx_scope_struct____str__;
-  if (PyType_Ready(&__pyx_type_11cython_code_8my_array___pyx_scope_struct_1_genexpr) < 0) __PYX_ERR(0, 219, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_11cython_code_8my_array___pyx_scope_struct_1_genexpr) < 0) __PYX_ERR(0, 322, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_11cython_code_8my_array___pyx_scope_struct_1_genexpr.tp_print = 0;
   #endif
@@ -7295,7 +7577,7 @@ static int __Pyx_modinit_type_init_code(void) {
     __pyx_type_11cython_code_8my_array___pyx_scope_struct_1_genexpr.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_11cython_code_8my_array___pyx_scope_struct_1_genexpr = &__pyx_type_11cython_code_8my_array___pyx_scope_struct_1_genexpr;
-  if (PyType_Ready(&__pyx_type_11cython_code_8my_array___pyx_scope_struct_2___repr__) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_11cython_code_8my_array___pyx_scope_struct_2___repr__) < 0) __PYX_ERR(0, 324, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_11cython_code_8my_array___pyx_scope_struct_2___repr__.tp_print = 0;
   #endif
@@ -7303,7 +7585,7 @@ static int __Pyx_modinit_type_init_code(void) {
     __pyx_type_11cython_code_8my_array___pyx_scope_struct_2___repr__.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_11cython_code_8my_array___pyx_scope_struct_2___repr__ = &__pyx_type_11cython_code_8my_array___pyx_scope_struct_2___repr__;
-  if (PyType_Ready(&__pyx_type_11cython_code_8my_array___pyx_scope_struct_3_genexpr) < 0) __PYX_ERR(0, 223, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_11cython_code_8my_array___pyx_scope_struct_3_genexpr) < 0) __PYX_ERR(0, 329, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_11cython_code_8my_array___pyx_scope_struct_3_genexpr.tp_print = 0;
   #endif
@@ -7515,7 +7797,7 @@ if (!__Pyx_RefNanny) {
   Py_INCREF(__pyx_m);
   #else
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("my_array", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("my_array", __pyx_methods, __pyx_k_Python_Cython_append_extend_ins, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -7561,20 +7843,20 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "cython_code/my_array.pyx":11
+  /* "cython_code/my_array.pyx":23
  * 
  * #      __eq__
  * import array as eq_array             # <<<<<<<<<<<<<<
  * 
- * #        ,
+ * # ,
  */
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_array, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_array, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_eq_array, __pyx_t_1) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_eq_array, __pyx_t_1) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cython_code/my_array.pyx":56
- * # https://github.com/python/cpython/blob/243b6c3b8fd3144450c477d99f01e31e7c3ebc0f/Modules/arraymodule.c#L556
+  /* "cython_code/my_array.pyx":86
+ * #     long  double
  * cdef arraydescr[2] descriptors = [
  *     arraydescr("d", sizeof(double), double_getitem, double_setitem),             # <<<<<<<<<<<<<<
  *     arraydescr("i", sizeof(long), int_getitem, int_setitem),
@@ -7585,7 +7867,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_2.getitem = __pyx_f_11cython_code_8my_array_double_getitem;
   __pyx_t_2.setitem = __pyx_f_11cython_code_8my_array_double_setitem;
 
-  /* "cython_code/my_array.pyx":57
+  /* "cython_code/my_array.pyx":87
  * cdef arraydescr[2] descriptors = [
  *     arraydescr("d", sizeof(double), double_getitem, double_setitem),
  *     arraydescr("i", sizeof(long), int_getitem, int_setitem),             # <<<<<<<<<<<<<<
@@ -7597,9 +7879,9 @@ if (!__Pyx_RefNanny) {
   __pyx_t_3.getitem = __pyx_f_11cython_code_8my_array_int_getitem;
   __pyx_t_3.setitem = __pyx_f_11cython_code_8my_array_int_setitem;
 
-  /* "cython_code/my_array.pyx":55
- * #         :
- * # https://github.com/python/cpython/blob/243b6c3b8fd3144450c477d99f01e31e7c3ebc0f/Modules/arraymodule.c#L556
+  /* "cython_code/my_array.pyx":85
+ * 
+ * #     long  double
  * cdef arraydescr[2] descriptors = [             # <<<<<<<<<<<<<<
  *     arraydescr("d", sizeof(double), double_getitem, double_setitem),
  *     arraydescr("i", sizeof(long), int_getitem, int_setitem),
@@ -7609,9 +7891,9 @@ if (!__Pyx_RefNanny) {
   memcpy(&(__pyx_v_11cython_code_8my_array_descriptors[0]), __pyx_t_4, sizeof(__pyx_v_11cython_code_8my_array_descriptors[0]) * (2));
 
   /* "cython_code/my_array.pyx":1
- * # cython: language_level=3             # <<<<<<<<<<<<<<
- * # distutils: language = c
- * 
+ * """             # <<<<<<<<<<<<<<
+ *   ,   Python
+ *   Cython
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -9131,6 +9413,13 @@ static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name)
 static CYTHON_INLINE void __Pyx_RaiseClosureNameError(const char *varname) {
     PyErr_Format(PyExc_NameError, "free variable '%s' referenced before assignment in enclosing scope", varname);
 }
+
+/* StringJoin */
+#if !CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyBytes_Join(PyObject* sep, PyObject* values) {
+    return PyObject_CallMethodObjArgs(sep, __pyx_n_s_join, values, NULL);
+}
+#endif
 
 /* JoinPyUnicode */
 static PyObject* __Pyx_PyUnicode_Join(PyObject* value_tuple, Py_ssize_t value_count, Py_ssize_t result_ulength,
