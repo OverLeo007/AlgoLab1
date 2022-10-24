@@ -170,9 +170,9 @@ cdef class array:
         :param o входное значение
         :return: результат распознания
         """
+        if abs(o) > 2_147_483_647:
+            raise ValueError("Слишком большое число")
         if isinstance(o, int):
-            if abs(o) > 2_147_483_647:
-                raise ValueError("Слишком большое число")
             if TypeCode.LONG == self.valtype:
                 return TypesCompare.INT_TO_INT
             if TypeCode.LONG != self.valtype:
@@ -309,6 +309,7 @@ cdef class array:
             raise IndexError(f"pop from empty list")
         if index is None:
             pop_val = self[self.length - 1]
+            self.shorten_array()
             self.length -= 1
             return pop_val
         if -index > self.length or index >= self.length:
@@ -376,13 +377,6 @@ cdef class array:
             if self[el] != array_to_eq[el]:
                 return False
         return True
-
-    # def __str__(self) -> str:
-    #     """
-    #     Возвращает текстовое представление массива
-    #     :return: Строка в виде [x1, x2, x3], содержащая все эл-ты массива
-    #     """
-    #     return f"[{', '.join(str(i) for i in self)}]"
 
     def __repr__(self) -> str:
         """
