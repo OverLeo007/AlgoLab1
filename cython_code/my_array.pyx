@@ -92,6 +92,15 @@ cdef enum TypeCode:
     DOUBLE = 0
     LONG = 1
 
+#Коды для распознавателя значений
+cdef enum TypesCompare:
+    INT_TO_INT = 1
+    INT_TO_DOUBLE = 2
+    DOUBLE_TO_INT = 3
+    DOUBLE_TO_DOUBLE = 4
+    NOT_IN_TYPES = 0
+
+
 cdef int char_typecode_to_int(str typecode):
     """
     Преобразование строкового кода в число
@@ -103,6 +112,7 @@ cdef int char_typecode_to_int(str typecode):
     if typecode == "i":
         return TypeCode.LONG
     return -1
+
 
 cdef long index_validate(long index, long length):
     """
@@ -123,6 +133,7 @@ cdef class array:
     с поддержкой значений типа int и float
     """
     cdef public size_t length, size
+    cdef int valtype
     cdef char * data
     cdef arraydescr * descr
 
@@ -138,6 +149,7 @@ cdef class array:
         self.length = len(initialise)  # Кол-во элементов массива
 
         cdef int mtypecode = char_typecode_to_int(typecode)
+        self.valtype = mtypecode
         self.descr = &descriptors[mtypecode]
 
         # Выделяем память для массива
@@ -146,7 +158,48 @@ cdef class array:
             raise MemoryError()
 
         for i in range(self.length):
-            self[i] = initialise[i]
+            check_res = self.check_type(initialise[i])
+            if check_res == TypesCompare.NOT_IN_TYPES and check_res != TypesCompare.INT_TO_DOUBLE:
+                raise TypeError("Incorrect type of value")
+            self[i] = self.val_validate(initialise[i])
+
+
+    def check_type(self, o: object):
+        """
+        Распознание типа значение в соответствии с типом массива
+        :param o входное значение
+        :return: результат распознания
+        """
+        if isinstance(o, int):
+            if abs(o) > 2_147_483_647:
+                raise ValueError("Слишком большое число")
+            if TypeCode.LONG == self.valtype:
+                return TypesCompare.INT_TO_INT
+            if TypeCode.LONG != self.valtype:
+                return TypesCompare.INT_TO_DOUBLE
+        if isinstance(o, float):
+            if o.is_integer():
+                return TypesCompare.DOUBLE_TO_INT
+            if TypeCode.DOUBLE == self.valtype:
+                return TypesCompare.DOUBLE_TO_DOUBLE
+        return TypesCompare.NOT_IN_TYPES
+
+    def val_validate(self, object value):
+        """
+        Преобразование значения в соответствии с типом массива
+        :param value значение для преобразования
+        :return: преобразованное значение
+        """
+        check_res = self.check_type(value)
+        if check_res == TypesCompare.INT_TO_INT:
+            return int(value)
+        if check_res == TypesCompare.INT_TO_DOUBLE:
+            return float(value)
+        if check_res == TypesCompare.DOUBLE_TO_INT:
+            return int(value)
+        if check_res == TypesCompare.INT_TO_INT or check_res == TypesCompare.DOUBLE_TO_DOUBLE:
+            return value
+        raise TypeError("Incorrect type of value")
 
     def extend_array(self) -> None:
         """
@@ -183,13 +236,15 @@ cdef class array:
         """
         self.data = <char *> PyMem_Realloc(self.data, self.size * self.descr.itemsize)
 
-    def append(self, object item) -> None:
+    def append(self, item: object) -> None:
         """
         Добавление нового элемента в конец массива
         :param item: добавляемый элемент
         """
+        val_item = self.val_validate(item)
+
         self.extend_array()
-        self.descr.setitem(self, self.length, item)
+        self.descr.setitem(self, self.length, val_item)
         self.length += 1
 
     def extend(self, ext_arr: array) -> None:
@@ -213,8 +268,9 @@ cdef class array:
         :param index: индекс на который вставляем элемент
         :param item: вставляемый элемент
         """
+        val_item = self.val_validate(item)
         if index > self.length and index > 0:
-            self.append(item)
+            self.append(val_item)
             return
         if abs(index) > self.length and index < 0:
             index = 0
@@ -223,7 +279,7 @@ cdef class array:
         self.length += 1
         for i in range(self.length - 1, index, -1):
             self[i] = self[i - 1]
-        self[index] = item
+        self[index] = val_item
 
     def remove(self, object item) -> None:
         """
@@ -277,8 +333,11 @@ cdef class array:
         :param index: индекс элемента
         :return: значение, находящееся по индексу
         """
-        if 0 <= index < self.length:
-            return self.descr.getitem(self, index)
+        if not isinstance(index, int):
+            raise TypeError(f"array indices must be integers, not {type(index).__name__}")
+        new_ind = index_validate(index, self.length)
+        if 0 <= new_ind < self.length:
+            return self.descr.getitem(self, new_ind)
         raise IndexError("list index out of range")
 
     def __setitem__(self, index: int, value: object) -> None:
@@ -287,8 +346,12 @@ cdef class array:
         :param index: индекс элемента
         :param value: новое значение элемента
         """
-        if 0 <= index < self.length:
-            self.descr.setitem(self, index, value)
+        if not isinstance(index, int):
+            raise TypeError(f"array indices must be integers, not {type(index).__name__}")
+        new_ind = index_validate(index, self.length)
+        new_val = self.val_validate(value)
+        if 0 <= new_ind < self.length:
+            self.descr.setitem(self, new_ind, new_val)
         else:
             raise IndexError("list index out of range")
 
@@ -314,12 +377,12 @@ cdef class array:
                 return False
         return True
 
-    def __str__(self) -> str:
-        """
-        Возвращает текстовое представление массива
-        :return: Строка в виде [x1, x2, x3], содержащая все эл-ты массива
-        """
-        return f"[{', '.join(str(i) for i in self)}]"
+    # def __str__(self) -> str:
+    #     """
+    #     Возвращает текстовое представление массива
+    #     :return: Строка в виде [x1, x2, x3], содержащая все эл-ты массива
+    #     """
+    #     return f"[{', '.join(str(i) for i in self)}]"
 
     def __repr__(self) -> str:
         """
